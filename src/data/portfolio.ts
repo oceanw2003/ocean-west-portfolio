@@ -91,7 +91,7 @@ export const portfolio = {
   title: "Ocean West | Mechanical Engineer",
   description:
     "Mechanical engineering portfolio of Ocean West, featuring composite structures, Formula SAE, advanced manufacturing, mechanical testing, and AI product development.",
-  siteUrl: "https://example.vercel.app",
+  siteUrl: "https://ocean-west-portfolio.vercel.app",
   headline:
     "Mechanical Engineering, Composite Systems, and Intelligent Product Development.",
   subheadline:
