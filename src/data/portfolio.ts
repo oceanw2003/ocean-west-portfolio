@@ -37,9 +37,17 @@ export type Project = {
   constraintsAndTradeoffs?: string[];
   conceptDetails?: string[];
   focusAreas?: string[];
+  images?: ProjectImage[];
   sourceImageFolder: string;
   publicImageFolder: string;
   featured: boolean;
+};
+
+export type ProjectImage = {
+  src: string;
+  alt: string;
+  caption?: string;
+  featured?: boolean;
 };
 
 export type ExperienceEntry = {
@@ -254,6 +262,18 @@ export const portfolio = {
         "Mass reduction could not come at the expense of stiffness, strength, or driver usability.",
         "Manufacturing and tooling constraints shaped laminate and geometry decisions.",
       ],
+      images: [
+        {
+          src: "/images/projects/steering-wheel/cover.jpg",
+          alt: "Completed carbon-fiber Formula SAE steering wheel held during fabrication.",
+          featured: true,
+        },
+        {
+          src: "/images/projects/steering-wheel/manufacturing.jpg",
+          alt: "Carbon-fiber steering wheel plate being weighed during fabrication.",
+          caption: "Carbon-fiber plate prepared as part of the steering-wheel manufacturing process.",
+        },
+      ],
       sourceImageFolder: "source/images/projects/steering-wheel",
       publicImageFolder: "/images/projects/steering-wheel",
       featured: true,
@@ -349,6 +369,28 @@ export const portfolio = {
         "The chassis had limited space for both electrical and mechanical systems.",
         "Steering improvements had to coexist with cooling and structural requirements.",
       ],
+      images: [
+        {
+          src: "/images/projects/mf5-rc-car/cover.jpg",
+          alt: "Assembled MF-5 RC vehicle on a table with its radio controller.",
+          featured: true,
+        },
+        {
+          src: "/images/projects/mf5-rc-car/cad-drawing.jpg",
+          alt: "Technical CAD drawing of the MF-5 RC vehicle with multiple orthographic views.",
+          caption: "Technical CAD drawing used to communicate the MF-5 vehicle layout and dimensions.",
+        },
+        {
+          src: "/images/projects/mf5-rc-car/chassis.jpg",
+          alt: "CAD rendering of the MF-5 RC vehicle chassis.",
+          caption: "Chassis CAD rendering showing the vehicle's structural and packaging layout.",
+        },
+        {
+          src: "/images/projects/mf5-rc-car/qualifying-results.jpg",
+          alt: "Qualifying results sheet showing Mach Futura in first place with an 18.46 second time.",
+          caption: "Qualifying record: first place with an 18.46-second best time.",
+        },
+      ],
       sourceImageFolder: "source/images/projects/mf5-rc-car",
       publicImageFolder: "/images/projects/mf5-rc-car",
       featured: true,
@@ -414,6 +456,13 @@ export const portfolio = {
       constraintsAndTradeoffs: [
         "Low cost had to be balanced against usable instrumentation quality.",
         "The concept needed to support both mechanical fabrication and repeatable data collection.",
+      ],
+      images: [
+        {
+          src: "/images/projects/dynamometer/cover.jpg",
+          alt: "Low-cost engine dynamometer assembly with a Predator engine, torque arm, instrumentation, and printed intake components.",
+          featured: true,
+        },
       ],
       focusAreas: [
         "Mechanical design",

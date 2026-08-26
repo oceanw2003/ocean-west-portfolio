@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Project } from "@/data/portfolio";
 import { ProjectVisual } from "@/components/project-visual";
@@ -8,10 +9,22 @@ type ProjectCardProps = {
 };
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  const featuredImage = project.images?.find((image) => image.featured) ?? project.images?.[0];
+
   return (
     <article className="project-card">
       <div className="project-visual-frame">
-        <ProjectVisual slug={project.slug} title={project.title} />
+        {featuredImage ? (
+          <Image
+            alt={featuredImage.alt}
+            className="h-full w-full object-cover"
+            fill
+            sizes="(min-width: 1280px) 50vw, 100vw"
+            src={featuredImage.src}
+          />
+        ) : (
+          <ProjectVisual slug={project.slug} title={project.title} />
+        )}
       </div>
       <div className="mt-6">
         <p className="section-eyebrow">{project.category}</p>

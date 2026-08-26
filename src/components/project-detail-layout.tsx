@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Project, featuredProjects } from "@/data/portfolio";
 import { ProjectVisual } from "@/components/project-visual";
@@ -36,6 +37,7 @@ function DetailBlock({
 
 export function ProjectDetailLayout({ project }: ProjectDetailLayoutProps) {
   const related = featuredProjects.filter((item) => item.slug !== project.slug).slice(0, 3);
+  const featuredImage = project.images?.find((image) => image.featured) ?? project.images?.[0];
 
   return (
     <main className="bg-[var(--color-bg)] text-[var(--color-text)]">
@@ -72,7 +74,18 @@ export function ProjectDetailLayout({ project }: ProjectDetailLayoutProps) {
           </div>
 
           <div className="project-visual-frame min-h-[320px]">
-            <ProjectVisual slug={project.slug} title={project.title} />
+            {featuredImage ? (
+              <Image
+                alt={featuredImage.alt}
+                className="object-cover"
+                fill
+                priority
+                sizes="(min-width: 1024px) 45vw, 100vw"
+                src={featuredImage.src}
+              />
+            ) : (
+              <ProjectVisual slug={project.slug} title={project.title} />
+            )}
           </div>
         </div>
 
@@ -115,14 +128,31 @@ export function ProjectDetailLayout({ project }: ProjectDetailLayoutProps) {
         <DetailBlock items={project.conceptDetails} title="System Concept" />
         <DetailBlock items={project.focusAreas} title="Engineering Focus" />
 
-        <section className="panel">
-          <h2 className="text-2xl font-semibold text-white">Image Gallery Area</h2>
-          <p className="mt-4 text-sm leading-7 text-white/68">
-            Add final imagery to <code>{project.publicImageFolder}</code> and stage raw files in{" "}
-            <code>{project.sourceImageFolder}</code>. Suggested filenames are documented in
-            the project-image README.
-          </p>
-        </section>
+        {project.images && project.images.length > 1 ? (
+          <section className="panel">
+            <h2 className="text-2xl font-semibold text-white">Visual Documentation</h2>
+            <div className="mt-6 grid gap-5 md:grid-cols-2">
+              {project.images.slice(1).map((image) => (
+                <figure key={image.src}>
+                  <div className="relative aspect-[3/2] overflow-hidden rounded-2xl border border-white/10 bg-black">
+                    <Image
+                      alt={image.alt}
+                      className="object-cover"
+                      fill
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      src={image.src}
+                    />
+                  </div>
+                  {image.caption ? (
+                    <figcaption className="mt-3 text-sm leading-6 text-white/62">
+                      {image.caption}
+                    </figcaption>
+                  ) : null}
+                </figure>
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         <section className="panel">
           <h2 className="text-2xl font-semibold text-white">Related Projects</h2>

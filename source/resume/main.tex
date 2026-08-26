@@ -1,0 +1,269 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+
+% Tighter, aligned bullets
+\setlist[itemize]{leftmargin=0.15in, labelsep=0.4em, itemsep=0.3ex, topsep=0.2ex}
+
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{eso-pic}
+
+\setlength{\spaceskip}{0.9\fontdimen2\font}
+\linespread{0.98}
+ 
+\input{glyphtounicode}
+
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins (slightly wider than before)
+\addtolength{\oddsidemargin}{-0.6in}   % move text further left
+\addtolength{\evensidemargin}{-0.6in}  % move text further right
+\addtolength{\textwidth}{1.2in}        % increase width of text block
+\addtolength{\topmargin}{-0.5in}       % keep top margin
+\addtolength{\textheight}{1.2in}       % keep text height
+
+
+
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\definecolor{darknavy}{RGB}{15,60,130} % Deep, elegant navy blue
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{darknavy}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+% \AddToShipoutPictureBG*{
+%   \begin{tikzpicture}[remember picture,overlay]
+%     \node[anchor=north east, inner sep=0pt] at (current page.north east)
+%       {\includegraphics[width=4cm]{corner.png}};
+%   \end{tikzpicture}
+% }
+
+% \AddToShipoutPictureBG*{
+%   \begin{tikzpicture}[remember picture,overlay]
+%     \node[anchor=south west, inner sep=0pt] at (current page.south west)
+%       {\includegraphics[width=4cm]{corner2.png}};
+%   \end{tikzpicture}
+% }
+
+
+
+%----------HEADING----------
+% \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+%   \textbf{\href{http://sourabhbajaj.com/}{\Large Sourabh Bajaj}} & Email : \href{mailto:sourabh@sourabhbajaj.com}{sourabh@sourabhbajaj.com}\\
+%   \href{http://sourabhbajaj.com/}{http://www.sourabhbajaj.com} & Mobile : +1-123-456-7890 \\
+% \end{tabular*}
+
+\begin{center} 
+    \textbf{\Huge \scshape Ocean West} \\ \vspace{6pt}
+    \small Austin, TX $|$ \href{mailto:oceanw2003@gmail.com}{{oceanw2003@gmail.com}} $|$ (210) 632-7142 $|$
+    \href{https://linkedin.com/in/oceanw2003}{{linkedin.com/in/oceanw2003}} $|$ US Citizen
+\end{center}
+
+\vspace{-20pt}
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Composites Materials and Processes Integration Lead - Combustion Team}{May 2025 -- Present}
+      {Longhorn Racing, UT FSAE}{Austin, TX}\vspace{0.3em}
+      \resumeItemListStart
+        \resumeItem{Coordinated projects and introduced a design documentation system for carbon fiber steering wheel, pedal-box composites integration, sandwich panel structures, body panels, and tube assemblies in compliance with ASME, ISO, and ASTM standards.}
+        \resumeItem{Constructed and maintained a comprehensive library of composite material properties within ANSYS ACP, which equipped team members with the resources to fix the biggest causes of crashes.}
+        \resumeItem{Optimized the carbon fiber steering wheel design through FEA and layup adjustments, achieving a \textbf{50\% weight reduction} from the previous year with validated stiffness and strength retention.}
+        \resumeItem{Performed tensile, 3-point bend, epoxies/adhesive tests, and torsional tests on composite specimens to validate ANSYS simulations and characterize material performance; led to \textbf{FOS ranging between 1.5 and 8}.}
+        \resumeItem{Implemented advanced manufacturing methods including Compression Molding, Resin Infusion, Sheet Molding Compound (SMC) for forged carbon fiber, CNC machining, and high-temp 3D-printed tooling.}
+        \resumeItem{Refined advanced carbon fiber layup techniques in prototype development, enabling the team to manufacture complex geometries with enhanced precision; led to a \textbf{10\% reduction in material waste}.}
+        \resumeItem{Orchestrated comprehensive recruitment strategy that onboarded six engineers from a pool of over 100 applicants, achieving a \textbf{15\% improvement} in first-time build success rate.}
+        \resumeItem{Created Parametric CAD models for composite structures \textbf{enhancing efficiency by up to 60\%}.}
+      \resumeItemListEnd
+\vspace{0.3em}
+    \resumeSubheading
+      {Composites Engineer - Combustion Team}{Sep 2024 -- May 2025}
+      {Longhorn Racing, UT FSAE}{Austin, TX}\vspace{0.3em}
+      \resumeItemListStart
+        \resumeItem{Engineered and fabricated carbon fiber parts (airfoils, panels, muffler, bodywork) to optimize performance and manufacturability, contributing to the team’s \textbf{11th-place finish} in design.}
+        \resumeItem{Developed an Excel-based calculator integrating CAD surface densities and material properties to automate composite weight estimation, accelerating design iterations \textbf{by 15\%} and improving structural performance of manufactured parts.
+}
+        \resumeItem{Applied 3D printing for rapid prototyping and mold fabrication, improving turnaround on a new front wing design, side pods and steering wheel prototypes.}
+      \resumeItemListEnd
+\vspace{0.2em}
+      \resumeSubheading
+      {Undergraduate R\&D Intern - Fatigue Testing of 3D Printed Components}{Jan 2024 -- Aug 2024}
+      {Margie and Bill Klesse College of Engineering and Integrated Design, UTSA}{San Antonio, TX}\vspace{0.3em}
+      \resumeItemListStart
+       \resumeItem{Conducted \textbf{over 100} axial fatigue tests on additively manufactured titanium components using an MTS Landmark to evaluate material performance under cyclic loading.}
+      \resumeItem{Processed and analyzed experimental fatigue data to assess mechanical behavior and microstructural influences in additively manufactured metals, calculating Equivalent Initial Damage Size value (EIDS) for Ti-6Al-4V samples.}
+       
+      \resumeItemListEnd
+    \resumeSubHeadingListEnd
+     \vspace{-.9em}
+
+
+%-----------PROJECTS-----------
+\section{Projects}
+
+  \resumeSubHeadingListStart    \vspace{-.2em}
+    \resumeProjectHeading
+        {\textbf{RC Car Project: MF-5} $|$ \emph{GD\&T CAD/CAM, Iterative Design, Fabrication, Vehicle Dynamics}}{Jan 2025 -- May 2025}
+        \resumeItemListStart
+            \vspace{0.3em}
+            \resumeItem{Secured \textbf{\#1 qualifying position} out of 40 teams with the fastest lap time (18.46s over three laps).}
+            \resumeItem{Developed a custom steering system with optimized Ackermann geometry, implementing 1° negative camber and a 7° steering angle improvement that enhanced cornering efficiency and secured the top design score.}
+            \resumeItem{Conceptualized an enhanced layout for internal components, enabling a \textbf{7\% denser} arrangement while upholding cooling efficiency, ensuring the vehicle's optimal performance under race conditions, and maintained structural integrity.}
+        \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+\vspace{-1.0em}
+
+%-----------EDUCATION-----------
+\section{Education}
+
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {\textbf{University of Texas at Austin}}{Aug 2024 -- May 2027}
+      {BS Mechanical Engineering $|$ \scshape GPA: 3.51/4.0}{Austin, TX}
+      \resumeItemListStart
+      \vspace{0.3em}
+        \resumeItem{\textbf{Affiliations}: Longhorn Racing Combustion, ASME}
+        \resumeItem{\textbf{Relevant Coursework}: Structural Analysis, Composite Laminate Theory, Mechanics of Materials, Fluid Mechanics, Materials Engineering, Machine Elements, Mechatronics, Heat Transfer, Dynamic Systems and Controls, Materials Processing}
+      \resumeItemListEnd
+\vspace{0.3em}
+    \resumeSubheading
+      {\textbf{University of Texas at San Antonio}}{Aug 2022 -- May 2024}
+      {BS Mechanical Engineering $|$ \scshape GPA: 3.89/4.0}{San Antonio, TX}
+      \resumeItemListStart
+      \vspace{0.4em}
+        \resumeItem{\textbf{Affiliations}: Undergraduate Research Intern, AIAA, Bold Scholars UTSA}
+        \resumeItem{\textbf{Relevant Coursework}: Dynamics, Thermodynamics, Thermal Fluid Systems, Numerical Methods, Differential Equations}
+      \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+\vspace{-0.9em}
+
+%-----------Skills and Abilities-----------
+\section{Skills \& Abilities}
+  \resumeSubHeadingListStart   \vspace{-0.4em}
+
+      \resumeItemListStart
+        \resumeItem{\textbf{Software \& Tools:} SolidWorks, ANSYS Mechanical, Matlab, Python, Arduino, Bild PDM, Orca Slicer, HyperMesh}
+        \resumeItem{\textbf{Manufacturing:} 3D Printing (FDM), Prepreg Layup, Fiber Orientation Optimization, Core Material Integration, Surface Finish Techniques, Tooling Design, Material Testing}
+        \resumeItem{\textbf{Analysis \& Testing:} Digital Microscopy, Wind Tunnel Testing, Data Acquisition, Signal Processing, Non-Destructive Testing}
+    
+
+      \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+\vspace{-1.0em}
+%-----------ADDITIONALS-----------
+    \section{Additionals}
+  \resumeSubHeadingListStart   \vspace{-0.4em}
+
+      \resumeItemListStart
+        \resumeItem{\textbf{Awards}: FSAE International Competition \textbf{11th Place} in Design (2025), President’s List (1x), Dean’s List (2x), Sapientia Award}
+        \resumeItem{\textbf{Activities}: Golf, Digital Photographer, Astronomer, Motorsport \& F1 Enthusiast}
+
+
+      \resumeItemListEnd
+    \resumeSubHeadingListEnd
+ 
+    \begin{center} \vspace{0.1em}
+        \small{\textit{Fun Fact: I have never had a Red Bull energy drink.}}
+    \end{center}
+    
+%-------------------------------------------
+\end{document}

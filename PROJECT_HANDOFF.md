@@ -120,13 +120,12 @@ vercel --prod
 ## Known Limitations
 
 - Local validation is currently blocked on this machine because `npm` is not available on the system path.
-- The placeholder domain in `src/data/portfolio.ts` should be replaced with the final production domain after deployment.
-- Project pages currently use technical placeholder visuals until real images are added.
+- The production site is live at `https://ocean-west-portfolio.vercel.app/`.
+- Project pages use technical placeholder visuals until real images are added. The gallery is ready to display authentic images once their paths are added to the corresponding project data.
 
 ## Recommended Future Improvements
 
 - Add real project imagery and galleries for the four lead engineering projects.
-- Replace the placeholder production URL with the live Vercel domain.
 - Add Open Graph preview imagery.
 - Add more project-specific diagrams or CAD exports where available.
 - Add a profile image if desired.
