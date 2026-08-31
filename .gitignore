@@ -25,3 +25,9 @@ Thumbs.db
 /source/documents/
 /source/extracted/
 /source/resume/build/
+
+# build artifacts that should not be tracked
+tsconfig.tsbuildinfo
+
+# local editor and agent tooling
+/.claude/

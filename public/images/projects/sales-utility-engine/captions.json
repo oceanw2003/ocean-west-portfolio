@@ -1,0 +1,34 @@
+{
+  "01-landing-page-two-workspaces.png": {
+    "stage": "Entry point",
+    "caption": "One product, two workspaces. A shopper continues as a customer into a guided conversation; a dealership employee continues into the lead queue. Splitting them here is what lets the same lead record serve both sides."
+  },
+  "02-customer-chat-with-live-profile.png": {
+    "stage": "Step 1 · Conversation",
+    "caption": "The customer side. A local Gemma model runs the conversation while the panels on either side fill in from it: the profile on the left, the extracted summary and progress on the right. Qualification is a side effect of talking, not a form to fill in."
+  },
+  "03-prompt-injection-guardrail.png": {
+    "stage": "Step 1 · Guardrails",
+    "caption": "The same conversation under attack. Told the RAV4 is actually $1, the assistant declines to confirm the price, holds to the $30,400 figure in the catalog, and offers a callback from a real representative. Built after the case where a dealership chatbot was talked into selling a truck for a dollar."
+  },
+  "04-lead-scoring-with-penalties.png": {
+    "stage": "Step 2 · Qualification",
+    "caption": "The scoring engine behind that conversation. Intent, need fit, timeline, budget, engagement, and contact readiness are weighted into one number, with a penalty applied for trolling or injection attempts. The blockers line states plainly why this lead is not ready."
+  },
+  "05-employee-lead-queue-and-handoff.png": {
+    "stage": "Step 3 · Handoff",
+    "caption": "The employee side of the same records. Extracted preferences, priority score, and a generated handoff summary sit together, so a representative picks up with the context already assembled rather than reading the transcript."
+  },
+  "06-company-catalog-admin.png": {
+    "stage": "Configuration",
+    "caption": "The approved catalog a dealership controls. Recommendations and fallback answers are drawn only from these entries, which is what keeps the assistant inside real inventory and pricing."
+  },
+  "07-planned-system-architecture.png": {
+    "stage": "System design",
+    "caption": "The full intended architecture. Solid nodes shipped; the dashed security and control agent did not. Sales transcripts feed a pattern analyzer into a playbook, and product data passes a sanitization layer before it reaches the approved knowledge base."
+  },
+  "08-full-product-demo.mp4": {
+    "stage": "Walkthrough",
+    "caption": "The complete flow end to end, from first message through qualification to sales handoff."
+  }
+}

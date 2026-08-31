@@ -16,10 +16,18 @@ export type CapabilityCard = {
   bullets: string[];
 };
 
+/**
+ * Which side of the portfolio a project belongs to. Drives the filters on the
+ * projects index and keeps the homepage from becoming all software or all
+ * hardware, since the point of the site is that both are the same person.
+ */
+export type Discipline = "ai" | "mechanical";
+
 export type Project = {
   slug: string;
   title: string;
   shortTitle: string;
+  discipline: Discipline;
   category: string;
   summary: string;
   heroStatement: string;
@@ -37,27 +45,44 @@ export type Project = {
   constraintsAndTradeoffs?: string[];
   conceptDetails?: string[];
   focusAreas?: string[];
-  images?: ProjectImage[];
-  sourceImageFolder: string;
-  publicImageFolder: string;
+  /**
+   * Shown above the detail blocks on group projects. Without it a page full
+   * of "we built X" reads as solo work, which is the wrong impression to
+   * leave beside projects that genuinely were.
+   */
+  teamContext?: string;
+  /**
+   * Images are not listed here. They are discovered by scripts/scan-images.mjs
+   * from public/images/projects/<folder>/ so that adding photos to the site is
+   * a file copy rather than a data edit. See src/lib/project-images.ts.
+   */
   featured: boolean;
 };
 
-export type ProjectImage = {
-  src: string;
-  alt: string;
-  caption?: string;
-  featured?: boolean;
-};
-
-export type ExperienceEntry = {
+/**
+ * One position held at an organization.
+ *
+ * Split out from the organization itself because a single org can span
+ * several distinct roles. Flattening those into separate top-level entries
+ * repeats the organization three times and hides the progression, which is
+ * the most useful thing the section can show.
+ */
+export type Position = {
   role: string;
-  organization: string;
-  location: string;
   dates: string;
   summary: string;
   highlights: string[];
-  metrics?: string[];
+  /** Renders a live marker on the rail. */
+  current?: boolean;
+};
+
+export type ExperienceEntry = {
+  organization: string;
+  location: string;
+  /** The full span across every position held here. */
+  dates: string;
+  /** Newest first, so the rail reads top-down as most to least recent. */
+  positions: Position[];
 };
 
 export type SkillGroup = {
@@ -97,52 +122,49 @@ export const portfolio = {
   resumePath: "/documents/Ocean_West_Resume_AI_Engineering.pdf",
   expectedGraduation: "December 2026",
   field: "Mechanical Engineering",
-  title: "Ocean West | AI Engineering Portfolio",
+  title: "Ocean West | Engineering Portfolio",
   description:
-    "AI engineering portfolio of Ocean West, featuring multi-agent systems, local-first RAG, automotive AI workflows, computer vision, and Formula SAE engineering.",
+    "Engineering portfolio of Ocean West: multi-agent AI systems, local-first retrieval, LLM evaluation, computer vision, and mechanical design, analysis, and testing.",
   siteUrl: "https://ocean-west-portfolio.vercel.app",
-  headline:
-    "AI Engineering for Reliable, Local-First Product Systems.",
+  headline: "Ocean West",
   subheadline:
-    "Mechanical engineering student at The University of Texas at Austin building multi-agent systems, retrieval workflows, computer vision, and AI products grounded in evaluation, privacy, and real engineering use cases.",
+    "Mechanical engineering at UT Austin, building multi-agent AI systems, local-first retrieval, and computer vision. Two toolsets, one habit: nothing counts until it has been tested.",
   introduction:
-    "Ocean West builds practical AI systems from provider-agnostic multi-agent tools to strict-local engineering knowledge bases and automotive sales workflows. His mechanical engineering background brings a validation-first mindset to AI products used around proprietary data, physical systems, and human decisions.",
+    "In software that means an evaluation layer that caught fabricated sources 418 unit tests had happily passed. In hardware it means simulations checked against physical test data before a part goes on a car. The projects below are organized so you can look at either half, or see where they meet.",
   summary:
-    "AI engineering candidate with hands-on experience in multi-agent orchestration, local-first RAG, FastAPI services, LLM evaluation, computer vision, and engineering validation.",
+    "Mechanical engineering student building multi-agent AI systems, local-first retrieval, and computer vision, with an emphasis on evaluation, validation, and measured results.",
   nav: [
     { label: "Home", href: "/#top" },
-    { label: "Projects", href: "/#projects" },
+    { label: "Work", href: "/#projects" },
     { label: "Experience", href: "/#experience" },
     { label: "Skills", href: "/#skills" },
     { label: "Contact", href: "/#contact" },
   ] satisfies NavItem[],
+  // Deliberately split between the two disciplines. A visitor should be able to
+  // tell from the first screen that this is one person doing both.
   heroMetrics: [
     {
       value: "68",
       label: "agent tools",
-      detail:
-        "Built across 16 specialized sub-agents in a provider-agnostic AI assistant.",
+      detail: "Across 16 specialized sub-agents in a provider-agnostic AI assistant.",
+      emphasis: "result",
+    },
+    {
+      value: "200+",
+      label: "documents indexed",
+      detail: "In a local-first retrieval system with on-device embeddings and no cloud backend.",
       emphasis: "result",
     },
     {
       value: "418",
       label: "passing tests",
-      detail:
-        "Verified across the CLU multi-agent codebase and evaluation workflow.",
+      detail: "Across roughly 28,000 lines of Python in the CLU multi-agent codebase.",
       emphasis: "result",
     },
     {
-      value: "200+",
-      label: "engineering documents",
-      detail:
-        "Indexed in a local-first composites knowledge system for Longhorn Racing.",
-      emphasis: "result",
-    },
-    {
-      value: "15%",
-      label: "faster design iteration",
-      detail:
-        "Enabled by an Excel-based laminate calculator extended in the Composites AI Assistant.",
+      value: "100+",
+      label: "fatigue tests",
+      detail: "On additively manufactured titanium for an Air Force Research Laboratory project.",
       emphasis: "result",
     },
   ] satisfies Metric[],
@@ -168,23 +190,23 @@ export const portfolio = {
       ],
     },
     {
-      title: "AI Product Engineering",
+      title: "Mechanical Design",
       description:
-        "End-to-end systems that pair useful workflows with typed models, persistence, fallbacks, and test coverage.",
+        "Parts taken from CAD and simulation through fabrication and onto a vehicle, where being wrong is expensive.",
       bullets: [
-        "FastAPI, Pydantic, SQLite, REST APIs, and CLI development",
-        "Deterministic fallback behavior and API health checks",
-        "Audit logging, structured outputs, and LLM guardrails",
+        "SolidWorks, ANSYS Mechanical, and finite element analysis",
+        "Design for manufacture across machining, printing, and layup",
+        "Material-property workflows other subsystems build against",
       ],
     },
     {
-      title: "Engineering Context",
+      title: "Test and Validation",
       description:
-        "Mechanical systems work that informs how AI outputs are validated against measured behavior and real constraints.",
+        "The habit that connects both halves: an unverified result is a guess, whether it came from a solver or a model.",
       bullets: [
-        "Formula SAE composites, ANSYS, testing, and manufacturing",
-        "YOLO, OpenCV, RTSP streams, and data acquisition",
-        "Validation-first engineering for physical and digital systems",
+        "Tensile, bend, torsional, and axial fatigue testing",
+        "FEA correlated against measured physical response",
+        "Evaluation scoring for citations, grounding, and task completion",
       ],
     },
   ] satisfies CapabilityCard[],
@@ -193,6 +215,7 @@ export const portfolio = {
       slug: "clu-multi-agent-assistant",
       title: "CLU: Multi-Agent AI Assistant",
       shortTitle: "CLU",
+      discipline: "ai",
       category: "Multi-Agent Systems and LLM Evaluation",
       summary:
         "A provider-agnostic, production-oriented multi-agent assistant built around explicit autonomy, tool-use boundaries, local model support, and evaluation.",
@@ -240,6 +263,8 @@ export const portfolio = {
       engineeringProcess: [
         "Organized 68 tools across 16 specialized sub-agents with a backend supporting Claude, GPT, and local Ollama models.",
         "Defined a tiered autonomy model where read-only work can run unattended while writes and cost-incurring actions require explicit approval.",
+        "Built a multi-model consensus layer to reduce hallucination: two local models answer independently, their responses are embedded and compared by cosine similarity, and only close agreement returns directly.",
+        "Escalated disagreement through a higher-temperature candidate vote, then to a Claude and GPT arbiter, surfacing an unresolved split to the user instead of silently picking a side.",
         "Built RAG over a local Markdown knowledge base using wikilink graph traversal, backlinks, and hybrid semantic and full-text retrieval.",
       ],
       testingAndValidation: [
@@ -254,15 +279,16 @@ export const portfolio = {
       constraintsAndTradeoffs: [
         "Autonomy had to remain useful without allowing silent file writes or cost-incurring actions.",
         "Provider flexibility required stable interfaces across cloud and local models.",
+        "Consensus costs latency. Most answers resolve at the first tier in seconds, but a full escalation runs several local generations plus two paid calls, which is the price of not returning a confident wrong answer.",
+        "Running two 8B models on a 6GB laptop GPU means they execute back to back rather than concurrently, capping how fast the ladder can resolve.",
       ],
-      sourceImageFolder: "source/images/projects/clu",
-      publicImageFolder: "/images/projects/clu",
       featured: true,
     },
     {
       slug: "composites-ai-assistant",
       title: "Composites AI Assistant",
       shortTitle: "Composites AI",
+      discipline: "ai",
       category: "Local-First RAG for Formula SAE",
       summary:
         "A strict-local RAG system for Longhorn Racing's composites library, built to make proprietary engineering knowledge searchable without moving it to a cloud backend.",
@@ -324,14 +350,13 @@ export const portfolio = {
         "The system had to preserve local privacy without making retrieval slow or difficult to maintain.",
         "Engineering output needed to remain grounded in source documents rather than relying on unconstrained generation.",
       ],
-      sourceImageFolder: "source/images/projects/composites-ai-assistant",
-      publicImageFolder: "/images/projects/composites-ai-assistant",
       featured: true,
     },
     {
       slug: "sales-utility-engine",
       title: "Sales Utility Engine",
       shortTitle: "Sales Utility Engine",
+      discipline: "ai",
       category: "Automotive AI Product Development",
       summary:
         "An end-to-end automotive sales assistant with customer and employee workspaces for lead intake, qualification, recommendations, booking, and handoff.",
@@ -384,14 +409,13 @@ export const portfolio = {
         "External CRM and booking integrations remain mock-first; the product does not claim production integrations.",
         "Local model availability cannot be assumed, so deterministic behavior remains available as a fallback.",
       ],
-      sourceImageFolder: "source/images/projects/sales-utility-engine",
-      publicImageFolder: "/images/projects/sales-utility-engine",
       featured: true,
     },
     {
       slug: "door-guard",
       title: "Door Guard",
       shortTitle: "Door Guard",
+      discipline: "ai",
       category: "Computer Vision and Local AI",
       summary:
         "A local-first computer-vision prototype for door-zone monitoring, loitering detection, structured event capture, and optional local AI dialogue.",
@@ -429,14 +453,13 @@ export const portfolio = {
         "Detection quality depends on camera placement, stream reliability, lighting, and model performance.",
         "The prototype records structured evidence instead of making autonomous enforcement decisions.",
       ],
-      sourceImageFolder: "source/images/projects/door-guard",
-      publicImageFolder: "/images/projects/door-guard",
-      featured: true,
+      featured: false,
     },
     {
       slug: "steering-wheel-redesign",
       title: "Composite Steering Wheel Redesign",
       shortTitle: "Steering Wheel",
+      discipline: "mechanical",
       category: "Composite Structures, FEA, Manufacturing and Testing",
       summary:
         "Redesigned a carbon-fiber Formula SAE steering wheel to reduce mass while retaining stiffness, strength, ergonomics, and manufacturability.",
@@ -454,10 +477,16 @@ export const portfolio = {
       metrics: [
         {
           value: "50%",
-          label: "weight-reduction target",
+          label: "mass reduction",
+          detail: "Achieved against the previous steering-wheel design.",
+          emphasis: "result",
+        },
+        {
+          value: "1.5 - 8",
+          label: "factors of safety",
           detail:
-            "Targeted a 50% reduction in weight compared with the previous design.",
-          emphasis: "target",
+            "Established across load cases by correlating ANSYS results with physical testing.",
+          emphasis: "result",
         },
       ],
       contributions: [
@@ -501,32 +530,19 @@ export const portfolio = {
       ],
       results: [
         "Established a documented redesign process for a lighter steering-wheel concept.",
-        "Defined a 50% weight-reduction target without presenting it as a completed measured result.",
+        "Reached the 50% mass-reduction goal while holding stiffness, strength, and driver usability.",
       ],
       constraintsAndTradeoffs: [
         "Mass reduction could not come at the expense of stiffness, strength, or driver usability.",
         "Manufacturing and tooling constraints shaped laminate and geometry decisions.",
       ],
-      images: [
-        {
-          src: "/images/projects/steering-wheel/cover.jpg",
-          alt: "Completed carbon-fiber Formula SAE steering wheel held during fabrication.",
-          featured: true,
-        },
-        {
-          src: "/images/projects/steering-wheel/manufacturing.jpg",
-          alt: "Carbon-fiber steering wheel plate being weighed during fabrication.",
-          caption: "Carbon-fiber plate prepared as part of the steering-wheel manufacturing process.",
-        },
-      ],
-      sourceImageFolder: "source/images/projects/steering-wheel",
-      publicImageFolder: "/images/projects/steering-wheel",
-      featured: false,
+      featured: true,
     },
     {
       slug: "mf5-rc-vehicle",
       title: "MF-5 RC Vehicle",
       shortTitle: "MF-5 RC",
+      discipline: "mechanical",
       category: "Mechanical Design Course Project",
       summary:
         "Designed and manufactured a competition RC vehicle through iterative CAD, CAM, fabrication, and testing.",
@@ -614,36 +630,13 @@ export const portfolio = {
         "The chassis had limited space for both electrical and mechanical systems.",
         "Steering improvements had to coexist with cooling and structural requirements.",
       ],
-      images: [
-        {
-          src: "/images/projects/mf5-rc-car/cover.jpg",
-          alt: "Assembled MF-5 RC vehicle on a table with its radio controller.",
-          featured: true,
-        },
-        {
-          src: "/images/projects/mf5-rc-car/cad-drawing.jpg",
-          alt: "Technical CAD drawing of the MF-5 RC vehicle with multiple orthographic views.",
-          caption: "Technical CAD drawing used to communicate the MF-5 vehicle layout and dimensions.",
-        },
-        {
-          src: "/images/projects/mf5-rc-car/chassis.jpg",
-          alt: "CAD rendering of the MF-5 RC vehicle chassis.",
-          caption: "Chassis CAD rendering showing the vehicle's structural and packaging layout.",
-        },
-        {
-          src: "/images/projects/mf5-rc-car/qualifying-results.jpg",
-          alt: "Qualifying results sheet showing Mach Futura in first place with an 18.46 second time.",
-          caption: "Qualifying record: first place with an 18.46-second best time.",
-        },
-      ],
-      sourceImageFolder: "source/images/projects/mf5-rc-car",
-      publicImageFolder: "/images/projects/mf5-rc-car",
-      featured: false,
+      featured: true,
     },
     {
       slug: "low-cost-engine-dynamometer",
       title: "Low-Cost Engine Dynamometer",
       shortTitle: "Dynamometer",
+      discipline: "mechanical",
       category: "Combustion Engine Processes",
       summary:
         "Developed a low-cost dynamometer concept for a Predator 212 cc single-cylinder engine to measure torque and rotational speed and validate a custom Helmholtz-tuned intake.",
@@ -702,13 +695,6 @@ export const portfolio = {
         "Low cost had to be balanced against usable instrumentation quality.",
         "The concept needed to support both mechanical fabrication and repeatable data collection.",
       ],
-      images: [
-        {
-          src: "/images/projects/dynamometer/cover.jpg",
-          alt: "Low-cost engine dynamometer assembly with a Predator engine, torque arm, instrumentation, and printed intake components.",
-          featured: true,
-        },
-      ],
       focusAreas: [
         "Mechanical design",
         "Instrumentation",
@@ -718,14 +704,104 @@ export const portfolio = {
         "Data acquisition",
         "Experimental validation",
       ],
-      sourceImageFolder: "source/images/projects/dynamometer",
-      publicImageFolder: "/images/projects/dynamometer",
+      featured: true,
+    },
+    {
+      slug: "linkage-larry",
+      title: "Linkage Larry: Jansen Walking Robot",
+      shortTitle: "Linkage Larry",
+      discipline: "mechanical",
+      category: "Robot Mechanism Design",
+      summary:
+        "A six-legged walking robot that produces its gait through linkage geometry instead of control software, driven by one motor per side.",
+      heroStatement:
+        "Most walking robots coordinate many actuators through sensor feedback. This one has none. A Jansen eight-bar linkage turns a single rotary input into a walking trajectory mechanically, so the gait is a property of the geometry rather than the code.",
+      timeline: "Spring 2026",
+      teamContext:
+        "A four-person course project. I worked across the whole build rather than owning one subsystem, so the analysis, fabrication, and testing described below were shared work.",
+      technologies: [
+        "SolidWorks",
+        "Python",
+        "Kinematic analysis",
+        "FEA",
+        "Arduino",
+        "Laser cutting",
+        "3D printing",
+      ],
+      metrics: [
+        {
+          value: "1",
+          label: "degree of freedom",
+          detail:
+            "Confirmed by Gruebler's equation over 12 links and 16 joints, so one input fully determines the gait.",
+          emphasis: "result",
+        },
+        {
+          value: "400:1",
+          label: "gear reduction",
+          detail: "A 200:1 worm drive into a 2:1 gear train, for torque under load.",
+          emphasis: "result",
+        },
+        {
+          value: "8-bar",
+          label: "linkage per leg",
+          detail: "Six legs total, phase-offset around a shared crankshaft on each side.",
+          emphasis: "result",
+        },
+        {
+          value: "1.5x",
+          label: "load factor in FEA",
+          detail:
+            "Body weight multiplied by 1.5 for dynamic impact; no linkage failed at that load.",
+          emphasis: "result",
+        },
+      ],
+      objective:
+        "Demonstrate that stable, steerable walking can be produced by mechanism design rather than by control systems, sensors, and per-joint actuators.",
+      engineeringProcess: [
+        "Built the linkage in MotionGen first to confirm the foot path before committing to CAD, treating the proof of concept as something that had to stay easy to modify.",
+        "Modeled the full eight-bar leg in SolidWorks to check interference and range of motion in three dimensions.",
+        "Built one physical leg and got it swinging freely before cutting the remaining five, which set the bolt-torque reference for every joint after it.",
+        "Moved from a single leg to a synchronized six-leg chassis with phase offsets, then added the drivetrain and radio control.",
+      ],
+      designDecisions: [
+        "Used Jansen's published link proportions, which produce a smooth gait with a flat stance phase from a single crank.",
+        "Offset adjacent lateral legs by 180 degrees and corner legs by 90 degrees, so ground contact is continuous and motor load is spread across the rotation rather than spiking once per cycle.",
+        "Chose tank drive with one motor per side, making turning a differential-speed problem instead of a steering-mechanism problem.",
+        "Added an asymmetric indicator hole to the near-equilateral center ternary link, a poka-yoke that made it impossible to install in the wrong orientation.",
+        "Placed stainless washers at every plywood-on-plywood interface to cut friction, and plastic spacers between the three linkage layers to prevent interference.",
+      ],
+      toolsAndTechnologies: [
+        "SolidWorks for the linkage, chassis, and gear train",
+        "MotionGen for early kinematic proof of concept",
+        "Python for the dyad-based position, velocity, acceleration, and force solver",
+        "SolidWorks Simulation for coarse-mesh FEA on the leg assembly",
+        "Arduino Uno R3 with a motor shield, FlySky FS-i6X radio, and a 3S LiPo on a battery-eliminator circuit",
+        "Laser-cut 6mm plywood links with 3D-printed mounts and gears",
+      ],
+      testingAndValidation: [
+        "Wrote a Python solver that decomposes the linkage into dyads and applies the law of cosines at each one, avoiding a single large system of equations.",
+        "Chained position, velocity, and acceleration through all five loops and checked the resulting toe trace against the expected gait before trusting the output.",
+        "Ran coarse-mesh FEA at 1.5x body weight using laminate plywood properties, which identified the crank as the highest-stress region because it carries all input torque through a short moment arm.",
+        "Verified walking, differential-drive turning, and repeated operation on the assembled robot under radio control.",
+      ],
+      results: [
+        "The robot walked, turned in place through differential drive, and held together across repeated testing.",
+        "Locomotion came entirely from linkage geometry, with no sensors, feedback loops, or per-leg actuators.",
+        "No linkage failed under the conservative FEA load case.",
+      ],
+      constraintsAndTradeoffs: [
+        "Bolt-and-washer pivots worked but added friction and needed a torque sweet spot at every joint: too tight and the links bind, too loose and the mechanism develops play. Bearings would remove that tuning entirely and are the first change for a future revision.",
+        "The crank remains the structural limit. A metal insert or a machined aluminum crank would raise load capacity for payload or uneven ground.",
+        "The enclosure was designed before the electronics were physically laid out, so the cover came out undersized and the battery ended up zip-tied rather than mounted.",
+      ],
       featured: false,
     },
     {
       slug: "motion-tracking-fixture",
       title: "Motion-Tracking Fixture for Immersive Events",
       shortTitle: "Motion Tracking",
+      discipline: "mechanical",
       category: "Senior Design",
       summary:
         "Developed a modular multi-camera fixture concept for real-time human motion tracking in stadiums, concerts, and immersive venues.",
@@ -818,14 +894,13 @@ export const portfolio = {
         "Latency budgeting",
         "Scalability",
       ],
-      sourceImageFolder: "source/images/projects/motion-tracking",
-      publicImageFolder: "/images/projects/motion-tracking",
       featured: false,
     },
     {
       slug: "ai-brand-consistency-checker",
       title: "AI Brand Consistency Checker",
       shortTitle: "Brand Checker",
+      discipline: "ai",
       category: "AI Product Development Project",
       summary:
         "Built an AI-assisted tool that reviews uploaded marketing content against a company's brand requirements.",
@@ -884,131 +959,87 @@ export const portfolio = {
         "User experience",
         "AI system reliability",
       ],
-      sourceImageFolder: "source/images/projects/ai-brand-checker",
-      publicImageFolder: "/images/projects/ai-brand-checker",
-      featured: false,
-    },
-    {
-      slug: "basic-rag-system",
-      title: "Basic Retrieval-Augmented Generation System",
-      shortTitle: "RAG System",
-      category: "Independent AI Development",
-      summary:
-        "Developed a structured plan for a modular RAG application with separate frontend and backend workspaces.",
-      heroStatement:
-        "A software architecture plan organized around ingestion, retrieval, grounded generation, and maintainable handoff.",
-      technologies: [
-        "Python",
-        "APIs",
-        "Document processing",
-        "Vector databases",
-        "Testing",
-        "AI-assisted development with Codex",
-      ],
-      metrics: [],
-      objective:
-        "Create a modular RAG application plan with clear separation of concerns, testing, and documentation.",
-      responsibilities: [
-        "Architecture planning",
-        "Capability scoping",
-        "Environment and configuration planning",
-        "Testing and handoff structure",
-      ],
-      conceptDetails: [
-        "File ingestion and parsing",
-        "Text chunking",
-        "Embedding generation",
-        "Vector search",
-        "Context retrieval",
-        "Grounded answer generation",
-        "Source citations",
-        "Configuration and environment management",
-        "Automated testing",
-        "Project handoff documentation",
-        "Cleanup procedures for obsolete generated files",
-      ],
-      engineeringProcess: [
-        "Separated capabilities into modular frontend and backend workspaces.",
-        "Defined operational requirements like environment management, testing, and documentation from the outset.",
-      ],
-      toolsAndTechnologies: [
-        "Python",
-        "APIs",
-        "Document processing",
-        "Vector databases",
-        "Testing",
-      ],
-      designDecisions: [
-        "Architecture planning emphasized maintainability and grounded responses with citations.",
-        "Documentation and cleanup procedures were treated as part of the system design.",
-      ],
-      results: [
-        "Produced a structured plan for a modular RAG system rather than overstating it as a completed deployed product.",
-      ],
-      constraintsAndTradeoffs: [
-        "The system needed to stay modular while still covering ingestion, retrieval, generation, and handoff needs.",
-      ],
-      focusAreas: [
-        "Python",
-        "APIs",
-        "Document processing",
-        "Vector databases",
-        "Software architecture",
-        "Testing",
-      ],
-      sourceImageFolder: "source/images/projects/rag-system",
-      publicImageFolder: "/images/projects/rag-system",
       featured: false,
     },
   ] satisfies Project[],
   experience: [
     {
-      role: "AI Engineering Intern",
       organization: "Agentic Innovations",
       location: "Texas, United States",
-      dates: "Summer 2026",
-      summary:
-        "Completed a 12-week AI engineering program delivering prototypes across engineering, business, and marketing workflows.",
-      highlights: [
-        "Delivered prototypes on a four-person cross-functional team spanning engineering, business, and marketing.",
-        "Led Phase 2 as majority contributor on Sales Utility Engine, covering lead qualification, local LLM integration, persistence, and deployment.",
-        "Presented the Phase 2 product to senior engineers from NVIDIA, Google, Meta, and NASA alongside cybersecurity specialists and industry recruiters.",
+      dates: "May 2026 - August 2026",
+      positions: [
+        {
+          role: "AI Engineering Intern",
+          dates: "May 2026 - August 2026",
+          summary:
+            "Completed a 12-week AI engineering program delivering prototypes across engineering, business, and marketing workflows.",
+          highlights: [
+            "Delivered prototypes on a four-person cross-functional team spanning engineering, business, and marketing.",
+            "Led Phase 2 as majority contributor on Sales Utility Engine, covering lead qualification, local LLM integration, persistence, and deployment.",
+            "Presented the Phase 2 product to senior engineers from NVIDIA, Google, Meta, and NASA alongside cybersecurity specialists and industry recruiters.",
+          ],
+        },
       ],
     },
     {
-      role: "Composites Materials and Processes Integration Lead",
-      organization: "Longhorn Racing, UT Austin Formula SAE Combustion Team",
+      organization: "Longhorn Racing, UT Austin Formula SAE",
       location: "Austin, Texas",
-      dates: "May 2025 - May 2026",
-      summary:
-        "Led the materials and processing subsystem for non-aerodynamic composites across a 90-person Formula SAE team.",
-      highlights: [
-        "Owned composite design decisions across five vehicle systems and built material-property workflows used across the 10-person subsystem.",
-        "Supported a steering-wheel redesign that achieved a 50% mass reduction.",
-        "Validated ANSYS simulations against tensile, bend, adhesive, and torsional testing to establish factors of safety from 1.5 to 8.",
-        "Authored composite testing methodology and material-property documentation adopted for the following season.",
-      ],
-      metrics: [
-        "90-person Formula SAE team",
-        "Five vehicle systems",
-        "50% steering-wheel mass reduction",
-        "Factors of safety: 1.5 to 8",
+      dates: "September 2024 - Present",
+      positions: [
+        {
+          role: "Composites Advisor",
+          dates: "May 2026 - Present",
+          summary:
+            "Advisory role after handing the subsystem off to new leadership, deliberately lighter-touch during a final year of coursework.",
+          highlights: [
+            "Advises the incoming composites leadership on design, analysis, and manufacturing decisions.",
+            "Sits in on critical and final design reviews, and stays reachable between them for questions as they come up.",
+          ],
+          current: true,
+        },
+        {
+          role: "Composites Materials and Processes Integration Lead, Combustion Team",
+          dates: "May 2025 - May 2026",
+          summary:
+            "Led the materials and processing subsystem for non-aerodynamic composites on a 90-person Formula SAE team, owning design decisions across five vehicle systems.",
+          highlights: [
+            "Selected 6 engineers from a pool of over 100 applicants, and helped launch an off-campus composites manufacturing facility dedicated to Formula SAE fabrication and testing.",
+            "Coordinated subsystem projects across carbon-fiber wheels, panels, and tube structures, including R&D on an in-house carbon-fiber rim and a lightweight bucket seat.",
+            "Validated ANSYS Mechanical models against Instron tensile, three-point bend, adhesive, and torsional testing to establish factors of safety from 1.5 to 8.",
+            "Researched sheet moulding compound for forged carbon fiber and high-temperature printed molds to cut tooling lead times.",
+            "Supported a steering-wheel redesign that achieved a 50% mass reduction, and authored testing methodology adopted the following season.",
+          ],
+        },
+        {
+          role: "Composites Engineer, Combustion Team",
+          dates: "September 2024 - May 2025",
+          summary:
+            "Designed, analyzed, and fabricated carbon-fiber components across the car, and built the tooling to produce them.",
+          highlights: [
+            "Fabricated airfoils, panels, bodywork, and a roll-wrapped carbon-fiber muffler shell; modeled and integrated the front wing assembly in CAD.",
+            "Ran FEA in ANSYS Mechanical with ACP to optimize ply orientation and thickness on steering-column supports.",
+            "Built an Excel calculator predicting composite weight from CAD surface densities and material properties, later the basis for the Composites AI Assistant.",
+            "Produced molds in fiberglass, tooling board, foam, CNC aluminum, and 3D print, using printed prototypes to iterate on parts before committing to tooling.",
+          ],
+        },
       ],
     },
     {
-      role: "Undergraduate Research and Development Intern",
       organization:
         "Margie and Bill Klesse College of Engineering and Integrated Design, UTSA",
       location: "San Antonio, Texas",
       dates: "January 2024 - August 2024",
-      summary:
-        "Supported an Air Force Research Laboratory project through experimental fatigue testing and engineering analysis of additively manufactured titanium.",
-      highlights: [
-        "Conducted more than 100 axial fatigue tests on additively manufactured Ti-6Al-4V specimens.",
-        "Performed Equivalent Initial Damage Size analysis; results supported a graduate researcher's findings presentation.",
-      ],
-      metrics: [
-        "100+ axial fatigue tests completed.",
+      positions: [
+        {
+          role: "Undergraduate Research Intern",
+          dates: "January 2024 - August 2024",
+          summary:
+            "Supported an Air Force Research Laboratory project through experimental fatigue testing and engineering analysis of additively manufactured titanium.",
+          highlights: [
+            "Conducted more than 100 axial fatigue tests on additively manufactured Ti-6Al-4V specimens.",
+            "Performed Equivalent Initial Damage Size analysis; results supported a graduate researcher's findings presentation.",
+          ],
+        },
       ],
     },
   ] satisfies ExperienceEntry[],
@@ -1061,22 +1092,17 @@ export const portfolio = {
       ],
     },
     {
-      title: "Composite Manufacturing",
+      title: "Manufacturing and Fabrication",
       items: [
-        "Prepreg carbon-fiber layup",
-        "Wet layup",
-        "Resin infusion",
-        "Compression molding",
-        "Forged carbon-fiber processes",
-        "Sandwich-panel construction",
-        "Core-material integration",
-        "Adhesive bonding",
-        "Composite tooling design",
         "FDM 3D printing",
-        "High-temperature printed tooling",
         "CNC machining",
-        "Surface preparation and finishing",
+        "Laser cutting",
+        "Tooling design",
+        "Prepreg and wet carbon-fiber layup",
+        "Resin infusion",
+        "Adhesive bonding",
         "Prototype fabrication",
+        "Design for manufacture",
       ],
     },
     {

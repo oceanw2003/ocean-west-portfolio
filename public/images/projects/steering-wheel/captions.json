@@ -1,0 +1,18 @@
+{
+  "02-ansys-acp-ply-modeling.jpg": {
+    "stage": "Design · Laminate",
+    "caption": "Ply-by-ply laminate definition in ANSYS ACP, where fiber orientation and ply count are set before any structural run."
+  },
+  "03-z-deformation-from-three-point-bend-test.jpg": {
+    "stage": "Analysis · Bending",
+    "caption": "Out-of-plane deflection from the simulated three-point bend, checked against the physical test rather than trusted on its own."
+  },
+  "04-torque-test-element-node-selection.jpg": {
+    "stage": "Analysis · Torsion",
+    "caption": "Node selection for the torsional load case, matching where the physical fixture actually gripped the part."
+  },
+  "05-water-jet-cut-carbon-fiber-plate.jpg": {
+    "stage": "Fabrication",
+    "caption": "The water-jet cut plate: the manufacturing step that set the final geometry after analysis closed out."
+  }
+}

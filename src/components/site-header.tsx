@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FileText } from "lucide-react";
 import { NavItem } from "@/data/portfolio";
 import { MobileNav } from "@/components/mobile-nav";
@@ -10,39 +11,33 @@ type SiteHeaderProps = {
 
 export function SiteHeader({ nav, name, resumePath }: SiteHeaderProps) {
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-[rgba(9,9,9,0.78)] backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-10 lg:px-12">
-        <a className="group" href="#top">
-          <p className="text-[11px] uppercase tracking-[0.34em] text-[var(--color-accent)]">
+    <header className="site-header">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3.5 md:px-10 lg:px-12">
+        <Link className="group" href="/#top">
+          <p className="font-[family-name:var(--font-display)] text-[0.98rem] font-600 tracking-tight text-[var(--text)]">
             Ocean West
           </p>
-          <p className="mt-1 text-sm font-medium text-white/84 transition-colors group-hover:text-white">
-            Engineering Portfolio
-          </p>
-        </a>
+          <p className="stat-label mt-0.5">Engineering Portfolio</p>
+        </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-7 md:flex">
           {nav.map((item) => (
-            <a
-              className="text-sm text-white/68 transition-colors hover:text-white focus-visible:text-white"
-              href={item.href}
-              key={item.href}
-            >
+            <a className="nav-link" href={item.href} key={item.href}>
               {item.label}
             </a>
           ))}
           <a
-            className="button-secondary px-4 py-3"
+            className="button-secondary px-3.5 py-2.5"
             href={resumePath}
             rel="noreferrer"
             target="_blank"
           >
-            <FileText size={16} />
+            <FileText size={14} />
             Resume
           </a>
         </nav>
 
-        <div className="flex items-center gap-3 md:hidden">
+        <div className="flex items-center gap-2.5 md:hidden">
           <a
             aria-label={`Open ${name} resume`}
             className="icon-button"
@@ -50,7 +45,7 @@ export function SiteHeader({ nav, name, resumePath }: SiteHeaderProps) {
             rel="noreferrer"
             target="_blank"
           >
-            <FileText size={18} />
+            <FileText size={17} />
           </a>
           <MobileNav items={nav} />
         </div>

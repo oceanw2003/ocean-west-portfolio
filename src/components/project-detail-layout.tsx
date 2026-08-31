@@ -1,34 +1,28 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { Project, featuredProjects } from "@/data/portfolio";
+import { Project, portfolio } from "@/data/portfolio";
 import { ProjectVisual } from "@/components/project-visual";
+import { ProjectGallery } from "@/components/project-gallery";
 import { SectionHeading } from "@/components/section-heading";
+import { TechLine } from "@/components/spec-list";
+import { dedicatedCoverFor, galleryFor, sectionsFor } from "@/lib/project-images";
 
 type ProjectDetailLayoutProps = {
   project: Project;
 };
 
-function DetailBlock({
-  title,
-  items,
-}: {
-  title: string;
-  items?: string[];
-}) {
+function DetailBlock({ title, items }: { title: string; items?: string[] }) {
   if (!items || items.length === 0) {
     return null;
   }
 
   return (
     <section className="panel">
-      <h2 className="text-2xl font-semibold text-white">{title}</h2>
-      <ul className="mt-5 grid gap-3 text-sm leading-6 text-white/68">
+      <h2 className="panel-heading">{title}</h2>
+      <ul className="detail-list mt-5">
         {items.map((item) => (
-          <li className="flex gap-3" key={item}>
-            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
-            <span>{item}</span>
-          </li>
+          <li key={item}>{item}</li>
         ))}
       </ul>
     </section>
@@ -36,89 +30,133 @@ function DetailBlock({
 }
 
 export function ProjectDetailLayout({ project }: ProjectDetailLayoutProps) {
-  const related = featuredProjects.filter((item) => item.slug !== project.slug).slice(0, 3);
-  const featuredImage = project.images?.find((image) => image.featured) ?? project.images?.[0];
+  const images = galleryFor(project.slug);
+  const sections = sectionsFor(project.slug);
+  // Only a dedicated cover.* earns the hero slot. Otherwise the walkthrough
+  // leads, so the same screenshot does not appear twice on one page.
+  const cover = dedicatedCoverFor(project.slug);
+  const videoCount = images.filter((item) => item.kind === "video").length;
+  const stillCount = images.length - videoCount;
+
+  // Related work is drawn from the same discipline first, so a mechanical page
+  // sends you to more mechanical work rather than bouncing you into the AI
+  // projects, but falls back to the other side rather than showing nothing.
+  const sameDiscipline = portfolio.projects.filter(
+    (item) => item.slug !== project.slug && item.discipline === project.discipline,
+  );
+  const otherDiscipline = portfolio.projects.filter(
+    (item) => item.slug !== project.slug && item.discipline !== project.discipline,
+  );
+  const related = [...sameDiscipline, ...otherDiscipline].slice(0, 3);
 
   return (
     <main className="bg-[var(--color-bg)] text-[var(--color-text)]">
       <section className="mx-auto max-w-7xl px-6 pb-12 pt-10 md:px-10 lg:px-12">
-        <Link className="inline-flex items-center gap-2 text-sm text-white/62 hover:text-white" href="/projects">
+        <Link
+          className="inline-flex items-center gap-2 text-sm text-[var(--text-dim)] transition-colors hover:text-[var(--text)]"
+          href="/projects"
+        >
           <ArrowLeft size={16} />
-          Back to projects
+          Back to all work
         </Link>
 
-        <div className="mt-8 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-          <div>
-            <SectionHeading
-              description={project.summary}
-              eyebrow={project.category}
-              title={project.title}
+        <div className="mt-8 max-w-3xl">
+          <SectionHeading
+            description={project.summary}
+            eyebrow={project.category}
+            title={project.title}
+          />
+          <p className="mt-6 text-[1rem] leading-7 text-[var(--text-muted)]">
+            {project.heroStatement}
+          </p>
+
+          {project.timeline ? <p className="stat-label mt-5">{project.timeline}</p> : null}
+
+          <TechLine items={project.technologies} />
+        </div>
+
+        {/* Full width rather than a thumbnail beside the text: the lead image
+            is the first real evidence a visitor sees, and at 45% of a column
+            it read as decoration. */}
+        {cover ? (
+          <div className="project-hero mt-10">
+            <Image
+              alt={cover.alt}
+              className="project-hero-image"
+              height={cover.height ?? 1000}
+              priority
+              src={cover.src}
+              width={cover.width ?? 1600}
             />
-            <p className="mt-6 max-w-2xl text-base leading-7 text-white/70">
-              {project.heroStatement}
-            </p>
-
-            {project.timeline ? (
-              <p className="mt-4 text-sm uppercase tracking-[0.18em] text-white/45">
-                {project.timeline}
-              </p>
-            ) : null}
-
-            <div className="mt-8 flex flex-wrap gap-2">
-              {project.technologies.map((technology) => (
-                <span className="tech-pill" key={technology}>
-                  {technology}
-                </span>
-              ))}
-            </div>
           </div>
-
-          <div className="project-visual-frame min-h-[320px]">
-            {featuredImage ? (
-              <Image
-                alt={featuredImage.alt}
-                className="object-cover"
-                fill
-                priority
-                sizes="(min-width: 1024px) 45vw, 100vw"
-                src={featuredImage.src}
-              />
-            ) : (
-              <ProjectVisual slug={project.slug} title={project.title} />
-            )}
+        ) : images.length === 0 ? (
+          <div className="project-visual-frame mt-10">
+            <ProjectVisual slug={project.slug} title={project.title} />
           </div>
-        </div>
+        ) : null}
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {project.metrics.length > 0 ? (
-            project.metrics.map((metric) => (
+        {project.metrics.length > 0 ? (
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            {project.metrics.map((metric) => (
               <article className="metric-card" key={`${project.slug}-${metric.label}`}>
-                <p className="text-2xl font-semibold text-white">{metric.value}</p>
-                <p className="mt-2 text-xs uppercase tracking-[0.18em] text-white/58">
-                  {metric.label}
+                <div className="flex items-baseline justify-between gap-3">
+                  <p className="stat-value text-[1.6rem]">{metric.value}</p>
+                  {metric.emphasis === "target" ? (
+                    <span className="metric-tag" data-emphasis="target">
+                      Target
+                    </span>
+                  ) : null}
+                </div>
+                <p className="stat-label mt-2">{metric.label}</p>
+                <p className="mt-3 text-[0.86rem] leading-6 text-[var(--text-muted)]">
+                  {metric.detail}
                 </p>
-                <p className="mt-3 text-sm leading-6 text-white/64">{metric.detail}</p>
               </article>
-            ))
-          ) : (
-            <article className="metric-card md:col-span-2 xl:col-span-4">
-              <p className="text-sm leading-7 text-white/66">
-                This project is currently documented as a concept or structured plan. The page focuses on the verified engineering intent, architecture, and constraints rather than invented measured outcomes.
-              </p>
-            </article>
-          )}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <p className="mt-10 max-w-3xl text-[0.92rem] leading-7 text-[var(--text-dim)]">
+            This project is documented as a concept and systems architecture. The page covers the
+            verified engineering intent and constraints rather than presenting measured results
+            that were never taken.
+          </p>
+        )}
       </section>
 
+      {/* Photos sit high on the page. For hardware especially, the images are
+          the evidence, and they should not be buried under six prose blocks. */}
+      {images.length > 0 ? (
+        <section className="mx-auto max-w-7xl px-6 pb-16 md:px-10 lg:px-12">
+          <div className="mb-6 flex flex-wrap items-baseline justify-between gap-3">
+            <h2 className="text-[1.5rem] font-semibold">Documentation</h2>
+            <p className="stat-label">
+              {[
+                stillCount > 0 ? `${stillCount} image${stillCount === 1 ? "" : "s"}` : null,
+                videoCount > 0 ? `${videoCount} video${videoCount === 1 ? "" : "s"}` : null,
+              ]
+                .filter(Boolean)
+                .join(" · ")}{" "}
+              &middot; click to open
+            </p>
+          </div>
+          <ProjectGallery projectTitle={project.title} sections={sections} />
+        </section>
+      ) : null}
+
       <section className="mx-auto grid max-w-7xl gap-6 px-6 pb-16 md:px-10 lg:px-12">
+        {project.teamContext ? (
+          <p className="team-note">{project.teamContext}</p>
+        ) : null}
+
         {project.objective ? (
           <section className="panel">
-            <h2 className="text-2xl font-semibold text-white">Project Overview</h2>
-            <p className="mt-4 text-sm leading-7 text-white/68">{project.objective}</p>
+            <h2 className="panel-heading">Project Overview</h2>
+            <p className="mt-4 text-[0.94rem] leading-7 text-[var(--text-muted)]">{project.objective}</p>
           </section>
         ) : null}
 
         <DetailBlock items={project.responsibilities} title="My Responsibilities" />
+        <DetailBlock items={project.contributions} title="My Contributions" />
         <DetailBlock items={project.engineeringProcess} title="Engineering Process" />
         <DetailBlock items={project.toolsAndTechnologies} title="Tools and Technologies" />
         <DetailBlock items={project.designDecisions} title="Key Design Decisions" />
@@ -128,41 +166,19 @@ export function ProjectDetailLayout({ project }: ProjectDetailLayoutProps) {
         <DetailBlock items={project.conceptDetails} title="System Concept" />
         <DetailBlock items={project.focusAreas} title="Engineering Focus" />
 
-        {project.images && project.images.length > 1 ? (
-          <section className="panel">
-            <h2 className="text-2xl font-semibold text-white">Visual Documentation</h2>
-            <div className="mt-6 grid gap-5 md:grid-cols-2">
-              {project.images.slice(1).map((image) => (
-                <figure key={image.src}>
-                  <div className="relative aspect-[3/2] overflow-hidden rounded-2xl border border-white/10 bg-black">
-                    <Image
-                      alt={image.alt}
-                      className="object-cover"
-                      fill
-                      sizes="(min-width: 768px) 50vw, 100vw"
-                      src={image.src}
-                    />
-                  </div>
-                  {image.caption ? (
-                    <figcaption className="mt-3 text-sm leading-6 text-white/62">
-                      {image.caption}
-                    </figcaption>
-                  ) : null}
-                </figure>
-              ))}
-            </div>
-          </section>
-        ) : null}
-
         <section className="panel">
-          <h2 className="text-2xl font-semibold text-white">Related Projects</h2>
+          <h2 className="panel-heading">Related Work</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {related.map((item) => (
-              <Link className="rounded-3xl border border-white/10 bg-white/[0.02] p-5 transition-colors hover:border-white/20" href={`/projects/${item.slug}`} key={item.slug}>
+              <Link
+                className="related-card"
+                href={`/projects/${item.slug}`}
+                key={item.slug}
+              >
                 <p className="section-eyebrow">{item.category}</p>
-                <h3 className="mt-3 text-lg font-semibold text-white">{item.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-white/62">{item.summary}</p>
-                <span className="mt-4 inline-flex items-center gap-2 text-sm text-[var(--color-accent)]">
+                <h3 className="mt-3 text-[1.05rem] font-semibold">{item.title}</h3>
+                <p className="mt-2 text-[0.86rem] leading-6 text-[var(--text-muted)]">{item.summary}</p>
+                <span className="mt-4 inline-flex items-center gap-2 font-[family-name:var(--font-mono)] text-[0.72rem] text-[var(--accent)]">
                   Open details
                   <ArrowRight size={15} />
                 </span>

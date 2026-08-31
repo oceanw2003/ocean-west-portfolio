@@ -1,0 +1,22 @@
+{
+  "01-hud-with-multi-model-consensus.png": {
+    "stage": "Interface",
+    "caption": "The main window. The activity log on the left tracks tool routing and model agreement in real time; the panel on the right shows which tier of consensus the current answer reached before it was returned."
+  },
+  "02-capability-map-by-department.png": {
+    "stage": "Architecture",
+    "caption": "Every capability, grouped by department. Blue nodes run unattended, amber nodes require approval before they execute, and dashed nodes are planned but not yet live."
+  },
+  "03-tool-routing-and-escalation-log.png": {
+    "stage": "Routing \u00b7 Consensus",
+    "caption": "A single turn in detail: the local model narrows 68 tools down to the 5 relevant to a calendar question, then two models are scored for agreement before any answer is returned."
+  },
+  "04-idea-capture-and-project-proposals.png": {
+    "stage": "Autonomy \u00b7 Proposals",
+    "caption": "A captured idea after the background pass: classified, turned into a project plan, and annotated with which steps reuse an existing tool, need a new one, or are still unclear. Nothing executes until the proposal is approved."
+  },
+  "05-autonomous-morning-brief.png": {
+    "stage": "Autonomy \u00b7 Unattended",
+    "caption": "The end of the chain: a morning brief assembled from calendar and inbox state and sent without being asked."
+  }
+}

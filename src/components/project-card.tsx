@@ -1,62 +1,75 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Images } from "lucide-react";
 import { Project } from "@/data/portfolio";
 import { ProjectVisual } from "@/components/project-visual";
+import { TechLine } from "@/components/spec-list";
+import { coverFor, imageCountFor } from "@/lib/project-images";
 
 type ProjectCardProps = {
   project: Project;
 };
 
 export function ProjectCard({ project }: ProjectCardProps) {
-  const featuredImage = project.images?.find((image) => image.featured) ?? project.images?.[0];
+  const cover = coverFor(project.slug);
+  const imageCount = imageCountFor(project.slug);
 
   return (
     <article className="project-card">
-      <div className="project-visual-frame">
-        {featuredImage ? (
+      <Link className="project-card-media" href={`/projects/${project.slug}`}>
+        {cover ? (
           <Image
-            alt={featuredImage.alt}
-            className="h-full w-full object-cover"
+            alt={cover.alt}
+            className="project-card-image"
             fill
-            sizes="(min-width: 1280px) 50vw, 100vw"
-            src={featuredImage.src}
+            sizes="(min-width: 1280px) 45vw, (min-width: 768px) 90vw, 100vw"
+            src={cover.src}
           />
         ) : (
           <ProjectVisual slug={project.slug} title={project.title} />
         )}
-      </div>
-      <div className="mt-6">
+        {imageCount > 1 ? (
+          <span className="project-card-count">
+            <Images size={12} />
+            {imageCount}
+          </span>
+        ) : null}
+        <span className="project-card-discipline">
+          {project.discipline === "ai" ? "AI Systems" : "Mechanical"}
+        </span>
+      </Link>
+
+      <div className="project-card-body">
         <p className="section-eyebrow">{project.category}</p>
-        <h3 className="mt-3 text-2xl font-semibold text-white">{project.title}</h3>
-        <p className="mt-3 text-sm leading-6 text-white/68">{project.summary}</p>
-        <div className="mt-5 flex flex-wrap gap-2">
-          {project.technologies.slice(0, 4).map((technology) => (
-            <span className="tech-pill" key={technology}>
-              {technology}
-            </span>
-          ))}
-        </div>
-        <div className="mt-6 grid gap-3 md:grid-cols-2">
-          {project.metrics.slice(0, 2).map((metric) => (
-            <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-4" key={metric.label}>
-              <p className="text-xl font-semibold text-white">{metric.value}</p>
-              <p className="mt-1 text-xs uppercase tracking-[0.18em] text-white/58">
-                {metric.label}
-              </p>
-            </div>
-          ))}
-          {project.metrics.length === 0 ? (
-            <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-4 md:col-span-2">
-              <p className="text-sm leading-6 text-white/62">
-                Concept and systems architecture focused. Detailed imagery and measured results can be added as the project evolves.
-              </p>
-            </div>
-          ) : null}
-        </div>
-        <Link className="inline-flex items-center gap-2 pt-6 text-sm font-medium text-[var(--color-accent)]" href={`/projects/${project.slug}`}>
-          View project details
-          <ArrowRight size={16} />
+        <h3 className="mt-3 text-[1.4rem] font-semibold">
+          <Link
+            className="transition-colors hover:text-[var(--accent)]"
+            href={`/projects/${project.slug}`}
+          >
+            {project.title}
+          </Link>
+        </h3>
+        <p className="mt-3 text-[0.92rem] leading-7 text-[var(--text-muted)]">{project.summary}</p>
+
+        <TechLine items={project.technologies.slice(0, 5)} />
+
+        {project.metrics.length > 0 ? (
+          <div className="mt-5 flex flex-wrap gap-x-8 gap-y-4">
+            {project.metrics.slice(0, 2).map((metric) => (
+              <div className="stat-tile" key={metric.label}>
+                <p className="stat-value text-[1.4rem]">{metric.value}</p>
+                <p className="stat-label mt-1">{metric.label}</p>
+              </div>
+            ))}
+          </div>
+        ) : null}
+
+        <Link
+          className="mt-6 inline-flex items-center gap-2 font-[family-name:var(--font-mono)] text-[0.76rem] tracking-[0.05em] text-[var(--accent)]"
+          href={`/projects/${project.slug}`}
+        >
+          View project
+          <ArrowRight size={14} />
         </Link>
       </div>
     </article>

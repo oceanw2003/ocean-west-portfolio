@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import { portfolio } from "@/data/portfolio";
-import { ProjectCard } from "@/components/project-card";
+import { ProjectIndex } from "@/components/project-index";
 import { SectionHeading } from "@/components/section-heading";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Projects",
+  title: "Work",
   description:
-    "AI engineering and mechanical systems work by Ocean West, including multi-agent systems, local-first RAG, automotive workflows, computer vision, and Formula SAE composites.",
+    "Engineering projects by Ocean West across multi-agent AI systems, local-first retrieval, computer vision, Formula SAE composites, FEA, and mechanical testing.",
   alternates: {
     canonical: absoluteUrl("/projects"),
   },
@@ -22,14 +22,12 @@ export default function ProjectsPage() {
       <main className="bg-[var(--color-bg)] text-[var(--color-text)]">
         <section className="mx-auto max-w-7xl px-6 py-16 md:px-10 lg:px-12">
           <SectionHeading
-            description="AI systems come first, followed by the Formula SAE, testing, and mechanical projects that inform Ocean's validation-first engineering approach."
-            eyebrow="Projects"
-            title="Detailed work organized around reliable AI delivery and verified engineering outcomes."
+            description="Software systems and physical hardware, filtered however you want to read them. Each project page covers the process, the constraints, and what was actually measured."
+            eyebrow="Work"
+            title="Everything, in one place."
           />
-          <div className="mt-12 grid gap-6 xl:grid-cols-2">
-            {portfolio.projects.map((project) => (
-              <ProjectCard key={project.slug} project={project} />
-            ))}
+          <div className="mt-10">
+            <ProjectIndex projects={portfolio.projects} />
           </div>
         </section>
       </main>

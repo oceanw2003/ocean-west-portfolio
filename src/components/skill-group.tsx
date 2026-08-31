@@ -1,20 +1,22 @@
 import { SkillGroup as SkillGroupType } from "@/data/portfolio";
+import { SpecList, SpecRow } from "@/components/spec-list";
 
-type SkillGroupProps = {
-  group: SkillGroupType;
+type SkillMatrixProps = {
+  groups: SkillGroupType[];
 };
 
-export function SkillGroup({ group }: SkillGroupProps) {
+/**
+ * The whole skills section is one table rather than six cards. Previously
+ * this rendered roughly seventy individual pills across six panels, which
+ * was most of the page's visual noise for content that is really just a
+ * labelled list.
+ */
+export function SkillMatrix({ groups }: SkillMatrixProps) {
   return (
-    <article className="panel">
-      <p className="section-eyebrow">{group.title}</p>
-      <div className="mt-5 flex flex-wrap gap-2">
-        {group.items.map((item) => (
-          <span className="tech-pill" key={item}>
-            {item}
-          </span>
-        ))}
-      </div>
-    </article>
+    <SpecList>
+      {groups.map((group) => (
+        <SpecRow items={group.items} key={group.title} label={group.title} />
+      ))}
+    </SpecList>
   );
 }

@@ -1,0 +1,38 @@
+{
+  "01-toe-path-from-the-dyad-solver.png": {
+    "stage": "Analysis · Kinematics",
+    "caption": "Where the project starts: the toe trace over one full crank rotation, solved in Python by breaking the linkage into dyads. The flat lower edge is the stance phase, the arch above it the swing. Get this curve wrong and nothing downstream matters."
+  },
+  "02-velocity-acceleration-and-load-capacity.png": {
+    "stage": "Analysis · Loads",
+    "caption": "The same solver carried through to velocity, acceleration, and vertical load capacity. Load drops to zero exactly where the foot leaves the ground, which is the check that the model matches the gait."
+  },
+  "03-cad-assembly-with-crankshaft-and-gear-train.png": {
+    "stage": "Design",
+    "caption": "The verified geometry taken into CAD: six legs on a shared crankshaft per side, phase-offset so ground contact stays continuous."
+  },
+  "04-fea-mesh-of-the-leg-assembly.png": {
+    "stage": "Analysis · Structure",
+    "caption": "Coarse-mesh FEA on a single eight-bar leg in laminate plywood, before committing to material."
+  },
+  "05-von-mises-stress-under-conservative-load.png": {
+    "stage": "Analysis · Structure",
+    "caption": "Von Mises stress at 1.5x body weight. The crank carries all input torque through a short moment arm, which made it the highest-stress region and the limit on payload."
+  },
+  "06-first-single-leg-prototype.png": {
+    "stage": "Fabrication · First leg",
+    "caption": "One leg built and held in a vise to confirm it swings freely. This set the bolt-torque reference used on every joint after it, rather than discovering the sweet spot on the fourth leg."
+  },
+  "07-leg-subassemblies-during-the-build.png": {
+    "stage": "Fabrication · Assembly",
+    "caption": "Laser-cut plywood links and printed gears mid-build, once the first leg proved the process."
+  },
+  "08-assembled-chassis-and-drivetrain.png": {
+    "stage": "Fabrication · Integration",
+    "caption": "Both side assemblies on the central rod, with the 400:1 worm and gear reduction driving the crankshafts."
+  },
+  "09-first-mobile-test-under-radio-control.png": {
+    "stage": "Testing",
+    "caption": "First complete mobile test under FlySky radio control: walking, and steering by differential drive."
+  }
+}

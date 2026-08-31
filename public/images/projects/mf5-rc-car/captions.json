@@ -1,0 +1,22 @@
+{
+  "02-chassis-cad-rendering.jpg": {
+    "stage": "Design",
+    "caption": "Chassis rendering showing the structural and packaging layout that everything else had to fit inside."
+  },
+  "03-technical-cad-drawing.jpg": {
+    "stage": "Design · Documentation",
+    "caption": "The orthographic drawing set used to communicate vehicle layout and dimensions to the rest of the team."
+  },
+  "05-mf-5-at-the-ut-tower.jpg": {
+    "stage": "Build complete",
+    "caption": "The finished vehicle after fabrication and test iteration."
+  },
+  "04-qualifying-results-first-place.jpg": {
+    "stage": "Competition · Result",
+    "caption": "Qualifying: first place with an 18.46-second best time."
+  },
+  "06-team-photo-after-competition.jpg": {
+    "stage": "Competition",
+    "caption": "The Mach Futura team after the final run."
+  }
+}

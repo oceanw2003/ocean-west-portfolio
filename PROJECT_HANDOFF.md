@@ -58,10 +58,20 @@ When making updates:
 
 ## How To Add Project Images
 
-1. Drop raw images into the relevant folder under `source/images/projects/`.
-2. Export optimized final images into the matching folder under `public/images/projects/`.
-3. Use the filename guidance from `public/images/projects/README.md`.
-4. Replace placeholder visuals with actual image components when assets are ready.
+Copy the files into `public/images/projects/<folder>/` and rebuild. Nothing else.
+
+`scripts/scan-images.mjs` walks those folders and writes
+`src/data/project-images.json`, which the gallery renders from. It runs
+automatically via `predev` and `prebuild`, so images picked up on the next
+`npm run dev` or `npm run build`. Run `npm run images` to regenerate on demand.
+
+Naming rules, the `captions.json` override, and resolution guidance are in
+`public/images/projects/README.md`. The short version: number the files to set
+the order, name them like captions because the filename becomes the alt text,
+and put the best photo first because image one is the cover.
+
+`source/images/` remains a local staging area for raw exports and is gitignored.
+Only what lands in `public/` is committed and deployed.
 
 ## How To Update Experience
 
@@ -75,8 +85,9 @@ When making updates:
 1. Add a new project object to `portfolio.projects` in `src/data/portfolio.ts`.
 2. Provide a unique slug.
 3. Add summary, technologies, responsibilities, and any verified metrics.
-4. Create matching source and public image folders.
-5. Add a matching placeholder visual branch in `src/components/project-visual.tsx` if needed.
+4. Set `discipline` to `"ai"` or `"mechanical"`; it drives the homepage grouping and the filters on `/projects`.
+5. Create `public/images/projects/<folder>/` and, if the folder name differs from the slug, add the mapping to `FOLDER_OVERRIDES` in `src/lib/project-images.ts`.
+6. Add a matching placeholder visual branch in `src/components/project-visual.tsx` if the project will not have photos.
 
 ## How To Replace The Resume
 
@@ -119,9 +130,11 @@ vercel --prod
 
 ## Known Limitations
 
-- Local validation is currently blocked on this machine because `npm` is not available on the system path.
 - The production site is live at `https://ocean-west-portfolio.vercel.app/`.
-- Project pages use technical placeholder visuals until real images are added. The gallery is ready to display authentic images once their paths are added to the corresponding project data.
+- Six of the ten projects have no photos yet and fall back to generated technical diagrams. Dropping files into their image folders is all that is needed to change that.
+- Three steering-wheel figures were extracted from a document at roughly 160px wide. They display small on purpose rather than upscaled and blurry; re-export them from the original ANSYS session if the files still exist.
+- Every image currently on the site is below 900px wide. `npm run images` prints a warning per file, so the list of what to re-export is the scan output.
+- Linkage Larry's copy was extracted from the eight course documents in `source/documents/linkage-larry/`. Those files carry a `.doc` extension but are MHTML archives, so they parse as MIME rather than as binary Word files.
 
 ## Recommended Future Improvements
 

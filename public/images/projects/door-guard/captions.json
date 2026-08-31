@@ -1,0 +1,14 @@
+{
+  "01-front-door-detection-zone-and-risk-score.png": {
+    "stage": "Detection",
+    "caption": "The live view at the front door. The yellow rectangle is the configured door zone, and the overlay carries the running loiter timer, the current risk score, and the active mode. Presence alone is not an event; being inside that box for long enough is."
+  },
+  "02-event-pipeline-and-spoken-deterrent.png": {
+    "stage": "Event pipeline",
+    "caption": "One full cycle in the log. Audio is transcribed, risk escalates from medium to high, and a local model generates the spoken deterrent: \"This is a residence, not a convenience store. Please come back tomorrow.\" Each risk snapshot is written with its timestamp and level, and the five failed frame reads at the bottom are the reconnect logic doing its job rather than the process dying."
+  },
+  "03-ip-camera-configured-for-rtsp.png": {
+    "stage": "Deployment",
+    "caption": "An off-the-shelf IP camera reconfigured to expose an RTSP stream the detector could consume, which is what let the system run against a real camera instead of a laptop webcam."
+  }
+}
