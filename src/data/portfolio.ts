@@ -93,21 +93,22 @@ export const portfolio = {
   location: "Austin, Texas",
   email: "oceanw2003@gmail.com",
   linkedin: "https://www.linkedin.com/in/oceanw2003",
-  resumePath: "/documents/Ocean_West_Resume.pdf",
-  expectedGraduation: "Fall 2026",
+  github: "https://github.com/oceanw2003",
+  resumePath: "/documents/Ocean_West_Resume_AI_Engineering.pdf",
+  expectedGraduation: "December 2026",
   field: "Mechanical Engineering",
-  title: "Ocean West | Mechanical Engineer",
+  title: "Ocean West | AI Engineering Portfolio",
   description:
-    "Mechanical engineering portfolio of Ocean West, featuring composite structures, Formula SAE, advanced manufacturing, mechanical testing, and AI product development.",
+    "AI engineering portfolio of Ocean West, featuring multi-agent systems, local-first RAG, automotive AI workflows, computer vision, and Formula SAE engineering.",
   siteUrl: "https://ocean-west-portfolio.vercel.app",
   headline:
-    "Mechanical Engineering, Composite Systems, and Intelligent Product Development.",
+    "AI Engineering for Reliable, Local-First Product Systems.",
   subheadline:
-    "Mechanical engineering student at The University of Texas at Austin focused on composite structures, advanced manufacturing, motorsport engineering, and AI-enabled product development.",
+    "Mechanical engineering student at The University of Texas at Austin building multi-agent systems, retrieval workflows, computer vision, and AI products grounded in evaluation, privacy, and real engineering use cases.",
   introduction:
-    "Ocean West leads materials and processes integration for non-aerodynamic composite systems on Longhorn Racing's Formula SAE combustion vehicle. His work connects structural analysis, carbon-fiber manufacturing, experimental validation, vehicle integration, and practical AI software.",
+    "Ocean West builds practical AI systems from provider-agnostic multi-agent tools to strict-local engineering knowledge bases and automotive sales workflows. His mechanical engineering background brings a validation-first mindset to AI products used around proprietary data, physical systems, and human decisions.",
   summary:
-    "Mechanical engineering student at The University of Texas at Austin with experience in composite structures, motorsport engineering, mechanical design, material testing, and AI product development.",
+    "AI engineering candidate with hands-on experience in multi-agent orchestration, local-first RAG, FastAPI services, LLM evaluation, computer vision, and engineering validation.",
   nav: [
     { label: "Home", href: "/#top" },
     { label: "Projects", href: "/#projects" },
@@ -117,77 +118,321 @@ export const portfolio = {
   ] satisfies NavItem[],
   heroMetrics: [
     {
-      value: "100+",
-      label: "axial fatigue tests",
+      value: "68",
+      label: "agent tools",
       detail:
-        "Conducted on additively manufactured titanium specimens using an MTS Landmark test system.",
+        "Built across 16 specialized sub-agents in a provider-agnostic AI assistant.",
       emphasis: "result",
     },
     {
-      value: "50%",
-      label: "steering-wheel mass target",
+      value: "418",
+      label: "passing tests",
       detail:
-        "Carbon-fiber steering-wheel redesign targeted a 50% reduction while retaining stiffness and strength.",
-      emphasis: "target",
-    },
-    {
-      value: "1st / 40",
-      label: "MF-5 qualifying result",
-      detail:
-        "Qualified first among 40 teams and recorded the fastest qualifying result at 18.46 seconds across three laps.",
+        "Verified across the CLU multi-agent codebase and evaluation workflow.",
       emphasis: "result",
     },
     {
-      value: "11th",
-      label: "Formula SAE design finish",
+      value: "200+",
+      label: "engineering documents",
       detail:
-        "Contributed to Longhorn Racing's 11th-place finish in the 2025 Formula SAE design event.",
+        "Indexed in a local-first composites knowledge system for Longhorn Racing.",
+      emphasis: "result",
+    },
+    {
+      value: "15%",
+      label: "faster design iteration",
+      detail:
+        "Enabled by an Excel-based laminate calculator extended in the Composites AI Assistant.",
       emphasis: "result",
     },
   ] satisfies Metric[],
   capabilityCards: [
     {
-      title: "Design and Analysis",
+      title: "Multi-Agent Systems",
       description:
-        "Parametric CAD, structural analysis, and composite laminate decisions grounded in manufacturability and load paths.",
+        "Tool-using AI systems designed around explicit autonomy boundaries, provider flexibility, and evaluation.",
       bullets: [
-        "SolidWorks, ANSYS Mechanical, ANSYS ACP, HyperMesh",
-        "Composite laminate analysis and fiber-orientation optimization",
-        "Documentation systems that improve continuity and traceability",
+        "Claude, GPT, and local Ollama backends",
+        "Tool registry with approval gates for costly or write actions",
+        "Evaluation for citations, grounding, and task completion",
       ],
     },
     {
-      title: "Composite Manufacturing",
+      title: "Local-First RAG",
       description:
-        "Hands-on process ownership across tooling, layup strategy, curing, machining, and integration.",
+        "Retrieval systems that protect proprietary engineering knowledge while keeping workflows useful and inspectable.",
       bullets: [
-        "Prepreg, wet layup, resin infusion, compression molding",
-        "High-temperature 3D-printed tooling and CNC finishing",
-        "Material-waste reduction through improved layup workflows",
+        "ChromaDB, sentence-transformers, hybrid retrieval",
+        "On-device embeddings and strict-local privacy controls",
+        "Incremental indexing for large document libraries",
       ],
     },
     {
-      title: "Testing and Validation",
+      title: "AI Product Engineering",
       description:
-        "Experimental work that connects simulation assumptions to measured behavior.",
+        "End-to-end systems that pair useful workflows with typed models, persistence, fallbacks, and test coverage.",
       bullets: [
-        "Tensile, three-point bend, torsional, adhesive, and fatigue testing",
-        "Data acquisition, signal processing, and material characterization",
-        "Validation planning for structural and vehicle systems",
+        "FastAPI, Pydantic, SQLite, REST APIs, and CLI development",
+        "Deterministic fallback behavior and API health checks",
+        "Audit logging, structured outputs, and LLM guardrails",
       ],
     },
     {
-      title: "AI and Software",
+      title: "Engineering Context",
       description:
-        "Software tools built to make engineering and product communication more reliable.",
+        "Mechanical systems work that informs how AI outputs are validated against measured behavior and real constraints.",
       bullets: [
-        "Python, MATLAB, Arduino, Excel, retrieval-augmented generation",
-        "Document-processing workflows and prompt engineering",
-        "AI-assisted product development with practical user-facing outputs",
+        "Formula SAE composites, ANSYS, testing, and manufacturing",
+        "YOLO, OpenCV, RTSP streams, and data acquisition",
+        "Validation-first engineering for physical and digital systems",
       ],
     },
   ] satisfies CapabilityCard[],
   projects: [
+    {
+      slug: "clu-multi-agent-assistant",
+      title: "CLU: Multi-Agent AI Assistant",
+      shortTitle: "CLU",
+      category: "Multi-Agent Systems and LLM Evaluation",
+      summary:
+        "A provider-agnostic, production-oriented multi-agent assistant built around explicit autonomy, tool-use boundaries, local model support, and evaluation.",
+      heroStatement:
+        "A multi-agent system designed to make autonomy inspectable: tools are specialized, risky actions require approval, and evaluation catches failures unit tests miss.",
+      timeline: "2026 - Present",
+      technologies: [
+        "Python",
+        "Anthropic Claude",
+        "OpenAI GPT",
+        "Ollama",
+        "FastAPI",
+        "SQLite",
+        "RAG",
+        "LLM evaluation",
+      ],
+      metrics: [
+        {
+          value: "68",
+          label: "tools",
+          detail: "Distributed across 16 specialized sub-agents.",
+          emphasis: "result",
+        },
+        {
+          value: "418",
+          label: "passing tests",
+          detail: "Verified across about 28,000 lines of Python.",
+          emphasis: "result",
+        },
+        {
+          value: "35% / 96%",
+          label: "evaluation contrast",
+          detail: "A fabricated-source failure scored 35% versus 96% for verified output.",
+          emphasis: "result",
+        },
+      ],
+      objective:
+        "Build a provider-agnostic assistant that can coordinate specialized tools while preserving human control over consequential actions.",
+      responsibilities: [
+        "Multi-agent architecture and provider abstraction",
+        "Tool registry and autonomy-tier design",
+        "Local knowledge-base retrieval",
+        "LLM evaluation and failure analysis",
+      ],
+      engineeringProcess: [
+        "Organized 68 tools across 16 specialized sub-agents with a backend supporting Claude, GPT, and local Ollama models.",
+        "Defined a tiered autonomy model where read-only work can run unattended while writes and cost-incurring actions require explicit approval.",
+        "Built RAG over a local Markdown knowledge base using wikilink graph traversal, backlinks, and hybrid semantic and full-text retrieval.",
+      ],
+      testingAndValidation: [
+        "Built an evaluation framework that scores citation resolution, grounding, and task completion.",
+        "Identified a fabricated-source failure that passed all unit tests, demonstrating why behavioral evaluation complements test coverage.",
+        "Maintained 418 passing tests across about 28,000 lines of Python.",
+      ],
+      results: [
+        "Created a reusable multi-agent foundation with explicit approval boundaries and local-model support.",
+        "Established an evaluation practice that distinguishes plausible output from verified, grounded output.",
+      ],
+      constraintsAndTradeoffs: [
+        "Autonomy had to remain useful without allowing silent file writes or cost-incurring actions.",
+        "Provider flexibility required stable interfaces across cloud and local models.",
+      ],
+      sourceImageFolder: "source/images/projects/clu",
+      publicImageFolder: "/images/projects/clu",
+      featured: true,
+    },
+    {
+      slug: "composites-ai-assistant",
+      title: "Composites AI Assistant",
+      shortTitle: "Composites AI",
+      category: "Local-First RAG for Formula SAE",
+      summary:
+        "A strict-local RAG system for Longhorn Racing's composites library, built to make proprietary engineering knowledge searchable without moving it to a cloud backend.",
+      heroStatement:
+        "A local engineering reference tool that pairs on-device retrieval with privacy controls, incremental indexing, and an established laminate-calculation workflow.",
+      timeline: "Spring 2026",
+      technologies: [
+        "Python",
+        "Streamlit",
+        "ChromaDB",
+        "sentence-transformers",
+        "Ollama",
+        "Azure OpenAI",
+        "Local embeddings",
+      ],
+      metrics: [
+        {
+          value: "200+",
+          label: "composites documents",
+          detail: "Standards, textbooks, ANSYS documentation, and internal process files.",
+          emphasis: "result",
+        },
+        {
+          value: "10",
+          label: "subsystem users",
+          detail: "Adopted as the standing reference tool for the composites subsystem.",
+          emphasis: "result",
+        },
+        {
+          value: "15%",
+          label: "faster design iteration",
+          detail: "Extended an Excel-based laminate calculator that cut design iteration time.",
+          emphasis: "result",
+        },
+      ],
+      objective:
+        "Give the Formula SAE composites team a private, local-first way to retrieve engineering context from its growing document library.",
+      responsibilities: [
+        "RAG system design and local embedding workflow",
+        "Strict-local privacy controls",
+        "Incremental indexing and document synchronization",
+        "Laminate calculator integration",
+      ],
+      engineeringProcess: [
+        "Indexed 200+ composites documents, including textbooks, material standards, ANSYS documentation, and internal process files, in a local Chroma vector store.",
+        "Used on-device embeddings to replace manual shared-drive searches with a focused engineering retrieval workflow.",
+        "Implemented incremental synchronization that skips unchanged files to keep re-indexing practical across the document library.",
+      ],
+      designDecisions: [
+        "Enforced a strict-local privacy mode that blocks cloud backends at the application layer for proprietary engineering material.",
+        "Supported local Ollama, retrieval-only, and optional Azure generation paths so operating mode stays explicit.",
+        "Extended the team's Excel-based laminate calculator rather than replacing a useful, established engineering workflow.",
+      ],
+      results: [
+        "Adopted as the standing reference tool by the 10-person composites subsystem.",
+        "Made a large, proprietary engineering library searchable while keeping documents on-machine.",
+      ],
+      constraintsAndTradeoffs: [
+        "The system had to preserve local privacy without making retrieval slow or difficult to maintain.",
+        "Engineering output needed to remain grounded in source documents rather than relying on unconstrained generation.",
+      ],
+      sourceImageFolder: "source/images/projects/composites-ai-assistant",
+      publicImageFolder: "/images/projects/composites-ai-assistant",
+      featured: true,
+    },
+    {
+      slug: "sales-utility-engine",
+      title: "Sales Utility Engine",
+      shortTitle: "Sales Utility Engine",
+      category: "Automotive AI Product Development",
+      summary:
+        "An end-to-end automotive sales assistant with customer and employee workspaces for lead intake, qualification, recommendations, booking, and handoff.",
+      heroStatement:
+        "A practical AI product that keeps deterministic qualification, persistence, and fallback behavior at the center of an LLM-assisted sales workflow.",
+      timeline: "Summer 2026",
+      technologies: [
+        "FastAPI",
+        "Pydantic",
+        "SQLite",
+        "Ollama",
+        "Gemma",
+        "Vercel",
+        "REST APIs",
+        "Pytest",
+      ],
+      metrics: [
+        {
+          value: "23",
+          label: "passing tests",
+          detail: "Focused API, storage, and assistant-generation coverage.",
+          emphasis: "result",
+        },
+        {
+          value: "2",
+          label: "user workspaces",
+          detail: "Separate customer and employee workflows for lead progress and handoff.",
+          emphasis: "result",
+        },
+      ],
+      objective:
+        "Build a reliable automotive sales workflow that qualifies inbound leads, helps users explore vehicle options, and produces actionable salesperson handoffs.",
+      responsibilities: [
+        "Majority contribution to Phase 2 product delivery",
+        "Lead qualification and booking-readiness workflow",
+        "Pydantic models, SQLite persistence, and session recovery",
+        "Local LLM integration, fallback behavior, and tests",
+      ],
+      engineeringProcess: [
+        "Built separate customer and employee workspaces for inbound lead intake, chat-based qualification, vehicle recommendations, meeting booking, and sales-handoff summaries.",
+        "Implemented a rule-based qualification engine for profile completeness, sales priority, and booking readiness, with manual override support.",
+        "Added customer-session recovery, structured persistence, and company-profile-aware mock vehicle catalogs.",
+      ],
+      testingAndValidation: [
+        "Integrated local Gemma inference through Ollama with deterministic fallback behavior when the model is unavailable.",
+        "Maintained 23 passing tests across API, storage, and assistant workflows.",
+        "Presented the Phase 2 product to senior engineers, cybersecurity specialists, and industry recruiters.",
+      ],
+      constraintsAndTradeoffs: [
+        "External CRM and booking integrations remain mock-first; the product does not claim production integrations.",
+        "Local model availability cannot be assumed, so deterministic behavior remains available as a fallback.",
+      ],
+      sourceImageFolder: "source/images/projects/sales-utility-engine",
+      publicImageFolder: "/images/projects/sales-utility-engine",
+      featured: true,
+    },
+    {
+      slug: "door-guard",
+      title: "Door Guard",
+      shortTitle: "Door Guard",
+      category: "Computer Vision and Local AI",
+      summary:
+        "A local-first computer-vision prototype for door-zone monitoring, loitering detection, structured event capture, and optional local AI dialogue.",
+      heroStatement:
+        "A real-time vision workflow that combines detection, configurable risk signals, local language-model behavior, and transparent event records.",
+      timeline: "Summer 2026",
+      technologies: [
+        "Python",
+        "YOLO",
+        "OpenCV",
+        "Ollama",
+        "RTSP/IP streams",
+        "JSONL",
+        "Local TTS",
+      ],
+      metrics: [],
+      objective:
+        "Prototype a local-first monitoring workflow that identifies people in a configurable door zone and records reliable, reviewable event context.",
+      responsibilities: [
+        "Live webcam and RTSP stream processing",
+        "Door-zone loitering and risk-state logic",
+        "Event records, snapshots, and optional local LLM dialogue",
+        "Reliability-constraint documentation",
+      ],
+      engineeringProcess: [
+        "Detected people in live webcam and RTSP streams with YOLO and OpenCV.",
+        "Tracked configurable door-zone loitering and produced structured JSONL event logs with risk-based snapshots.",
+        "Integrated local LLM-generated deterrent dialogue, optional text-to-speech, and microphone interaction.",
+      ],
+      testingAndValidation: [
+        "Documented reliability constraints so the prototype's intended behavior and limitations remain explicit.",
+        "Kept the workflow local-first to support privacy-sensitive monitoring contexts.",
+      ],
+      constraintsAndTradeoffs: [
+        "Detection quality depends on camera placement, stream reliability, lighting, and model performance.",
+        "The prototype records structured evidence instead of making autonomous enforcement decisions.",
+      ],
+      sourceImageFolder: "source/images/projects/door-guard",
+      publicImageFolder: "/images/projects/door-guard",
+      featured: true,
+    },
     {
       slug: "steering-wheel-redesign",
       title: "Composite Steering Wheel Redesign",
@@ -276,7 +521,7 @@ export const portfolio = {
       ],
       sourceImageFolder: "source/images/projects/steering-wheel",
       publicImageFolder: "/images/projects/steering-wheel",
-      featured: true,
+      featured: false,
     },
     {
       slug: "mf5-rc-vehicle",
@@ -393,7 +638,7 @@ export const portfolio = {
       ],
       sourceImageFolder: "source/images/projects/mf5-rc-car",
       publicImageFolder: "/images/projects/mf5-rc-car",
-      featured: true,
+      featured: false,
     },
     {
       slug: "low-cost-engine-dynamometer",
@@ -475,7 +720,7 @@ export const portfolio = {
       ],
       sourceImageFolder: "source/images/projects/dynamometer",
       publicImageFolder: "/images/projects/dynamometer",
-      featured: true,
+      featured: false,
     },
     {
       slug: "motion-tracking-fixture",
@@ -575,7 +820,7 @@ export const portfolio = {
       ],
       sourceImageFolder: "source/images/projects/motion-tracking",
       publicImageFolder: "/images/projects/motion-tracking",
-      featured: true,
+      featured: false,
     },
     {
       slug: "ai-brand-consistency-checker",
@@ -718,42 +963,36 @@ export const portfolio = {
   ] satisfies Project[],
   experience: [
     {
-      role: "Composites Materials and Processes Integration Lead",
-      organization: "Longhorn Racing, UT Austin Formula SAE Combustion Team",
-      location: "Austin, Texas",
-      dates: "May 2025 - Present",
+      role: "AI Engineering Intern",
+      organization: "Agentic Innovations",
+      location: "Texas, United States",
+      dates: "Summer 2026",
       summary:
-        "Leads non-aerodynamic composite systems integration across design, analysis, manufacturing, testing, and vehicle installation.",
+        "Completed a 12-week AI engineering program delivering prototypes across engineering, business, and marketing workflows.",
       highlights: [
-        "Coordinates composite projects involving the steering wheel, pedal-box integration, sandwich panels, body panels, structural tubes, seat pan, firewall, headrest plate, steering supports, muffler shell, dashboard, and other assemblies.",
-        "Introduced a structured design-documentation system to improve continuity, engineering traceability, and manufacturing readiness.",
-        "Built and maintained a composite material-property library in ANSYS ACP.",
-        "Conducted tensile, three-point bend, adhesive, and torsional testing to validate simulations and characterize performance.",
-        "Applied compression molding, resin infusion, forged-carbon sheet molding compound, CNC machining, prepreg processing, and high-temperature 3D-printed tooling.",
-      ],
-      metrics: [
-        "Targeted a 50% steering-wheel weight reduction.",
-        "Estimated 10% reduction in material waste.",
-        "Recruited and onboarded six engineers from more than 100 applicants.",
-        "Developed parametric CAD models that improved modeling efficiency by as much as 60%.",
+        "Delivered prototypes on a four-person cross-functional team spanning engineering, business, and marketing.",
+        "Led Phase 2 as majority contributor on Sales Utility Engine, covering lead qualification, local LLM integration, persistence, and deployment.",
+        "Presented the Phase 2 product to senior engineers from NVIDIA, Google, Meta, and NASA alongside cybersecurity specialists and industry recruiters.",
       ],
     },
     {
-      role: "Composites Engineer",
+      role: "Composites Materials and Processes Integration Lead",
       organization: "Longhorn Racing, UT Austin Formula SAE Combustion Team",
       location: "Austin, Texas",
-      dates: "September 2024 - May 2025",
+      dates: "May 2025 - May 2026",
       summary:
-        "Engineered and manufactured carbon-fiber vehicle components while improving design iteration speed and manufacturability.",
+        "Led the materials and processing subsystem for non-aerodynamic composites across a 90-person Formula SAE team.",
       highlights: [
-        "Engineered and manufactured carbon-fiber airfoils, body panels, a muffler shell, sandwich structures, and additional components.",
-        "Created an Excel-based composite weight-estimation calculator using CAD surface areas, laminate definitions, and material properties.",
-        "Used FDM 3D printing for prototypes, molds, tooling, and design validation.",
-        "Supported development of front-wing, side-pod, steering-wheel, and bodywork prototypes.",
+        "Owned composite design decisions across five vehicle systems and built material-property workflows used across the 10-person subsystem.",
+        "Supported a steering-wheel redesign that achieved a 50% mass reduction.",
+        "Validated ANSYS simulations against tensile, bend, adhesive, and torsional testing to establish factors of safety from 1.5 to 8.",
+        "Authored composite testing methodology and material-property documentation adopted for the following season.",
       ],
       metrics: [
-        "Contributed to the team's 11th-place finish in the 2025 Formula SAE design event.",
-        "Accelerated composite design iterations by approximately 15% through automated weight estimation.",
+        "90-person Formula SAE team",
+        "Five vehicle systems",
+        "50% steering-wheel mass reduction",
+        "Factors of safety: 1.5 to 8",
       ],
     },
     {
@@ -763,12 +1002,10 @@ export const portfolio = {
       location: "San Antonio, Texas",
       dates: "January 2024 - August 2024",
       summary:
-        "Supported experimental fatigue research on additively manufactured titanium through testing, microscopy, data processing, and engineering analysis.",
+        "Supported an Air Force Research Laboratory project through experimental fatigue testing and engineering analysis of additively manufactured titanium.",
       highlights: [
-        "Conducted more than 100 axial fatigue tests on additively manufactured titanium specimens using an MTS Landmark test system.",
-        "Processed and analyzed fatigue data for additively manufactured Ti-6Al-4V.",
-        "Calculated Equivalent Initial Damage Size values to characterize fatigue performance.",
-        "Investigated relationships among manufacturing conditions, microstructure, defects, and fatigue life.",
+        "Conducted more than 100 axial fatigue tests on additively manufactured Ti-6Al-4V specimens.",
+        "Performed Equivalent Initial Damage Size analysis; results supported a graduate researcher's findings presentation.",
       ],
       metrics: [
         "100+ axial fatigue tests completed.",
@@ -776,6 +1013,35 @@ export const portfolio = {
     },
   ] satisfies ExperienceEntry[],
   skillGroups: [
+    {
+      title: "AI Engineering",
+      items: [
+        "Python",
+        "Retrieval-augmented generation",
+        "OpenAI and Azure OpenAI APIs",
+        "ChromaDB",
+        "Local-first inference",
+        "Multi-agent orchestration",
+        "Agent evaluation and observability",
+        "Semantic and BM25 retrieval",
+        "Structured outputs",
+      ],
+    },
+    {
+      title: "Software and AI Operations",
+      items: [
+        "FastAPI",
+        "Streamlit",
+        "REST APIs",
+        "CLI development",
+        "Pydantic",
+        "JSON Schema and OpenAPI",
+        "Pytest",
+        "Git and GitHub",
+        "JSONL audit logging",
+        "LLM guardrails and prompt-injection testing",
+      ],
+    },
     {
       title: "Mechanical Design and Analysis",
       items: [
@@ -834,16 +1100,13 @@ export const portfolio = {
     {
       title: "Software and Programming",
       items: [
-        "Python",
         "MATLAB",
         "Arduino",
         "Excel",
         "Bild PDM",
         "Orca Slicer",
-        "AI-assisted development with Codex",
-        "Retrieval-augmented generation",
-        "Prompt engineering",
-        "Document-processing workflows",
+        "Data acquisition",
+        "Technical documentation",
       ],
     },
   ] satisfies SkillGroup[],
@@ -852,7 +1115,7 @@ export const portfolio = {
       institution: "The University of Texas at Austin",
       degree: "Bachelor of Science in Mechanical Engineering",
       location: "Austin, Texas",
-      dates: "August 2024 - Fall 2026",
+      dates: "August 2024 - Expected December 2026",
       gpa: "3.51 / 4.00",
       affiliations: [
         "Longhorn Racing Combustion",
@@ -894,29 +1157,24 @@ export const portfolio = {
   ] satisfies EducationEntry[],
   recognitions: [
     {
-      title: "Formula SAE Design - 11th Place",
+      title: "Formula SAE Competition",
       detail:
-        "Contributed to Longhorn Racing's 11th-place finish in the 2025 Formula SAE design event.",
-    },
-    {
-      title: "Recruitment and Mentoring",
-      detail:
-        "Recruited and onboarded six engineers from a pool of more than 100 applicants.",
-    },
-    {
-      title: "MF-5 RC Vehicle Results",
-      detail:
-        "Qualified first among 40 teams, earned the fastest qualifying result, and received the top design score.",
-    },
-    {
-      title: "Documentation and Continuity Systems",
-      detail:
-        "Built documentation and material-property systems to improve technical continuity and manufacturing readiness.",
+        "26th Overall in 2026, up from 46th, and 11th in Design in 2025.",
     },
     {
       title: "Academic Recognition",
       detail:
-        "President's List, Dean's List for two semesters, and Sapientia Award.",
+        "President's List and Dean's List for two semesters.",
+    },
+    {
+      title: "AI Product Presentation",
+      detail:
+        "Presented Sales Utility Engine to senior engineers, cybersecurity specialists, and industry recruiters during the Agentic Innovations program.",
+    },
+    {
+      title: "Engineering Documentation",
+      detail:
+        "Built material-property and testing workflows adopted for the following Longhorn Racing season.",
     },
   ] satisfies RecognitionItem[],
   contactLinks: [
@@ -930,23 +1188,28 @@ export const portfolio = {
       external: true,
     },
     {
+      label: "GitHub",
+      href: "https://github.com/oceanw2003",
+      external: true,
+    },
+    {
       label: "Resume",
-      href: "/documents/Ocean_West_Resume.pdf",
+      href: "/documents/Ocean_West_Resume_AI_Engineering.pdf",
     },
   ] satisfies ContactLink[],
   professionalInterests: [
-    "Composite structures",
-    "Advanced manufacturing",
-    "Motorsport engineering",
-    "Mechanical product development",
-    "Structural analysis",
-    "Experimental testing",
-    "Vehicle systems",
-    "Artificial intelligence",
-    "Engineering software",
-    "Robotics",
+    "Multi-agent systems",
+    "Local-first AI",
+    "Retrieval-augmented generation",
+    "LLM evaluation",
     "Computer vision",
-    "Automotive photography",
+    "Automotive AI",
+    "Formula SAE",
+    "Composite systems",
+    "Motorsport",
+    "Astronomy",
+    "Golf",
+    "Photography",
   ],
 };
 

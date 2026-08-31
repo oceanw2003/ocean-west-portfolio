@@ -1,4 +1,4 @@
-import { ArrowRight, ExternalLink, FileText, Mail } from "lucide-react";
+import { ArrowRight, Code2, ExternalLink, FileText, Mail } from "lucide-react";
 import { portfolio, featuredProjects } from "@/data/portfolio";
 import { ButtonLink } from "@/components/button-link";
 import { CopyEmailButton } from "@/components/copy-email-button";
@@ -34,7 +34,7 @@ const personSchema = {
       name: "The University of Texas at San Antonio",
     },
   ],
-  sameAs: [portfolio.linkedin],
+  sameAs: [portfolio.linkedin, portfolio.github],
 };
 
 export default function HomePage() {
@@ -50,7 +50,7 @@ export default function HomePage() {
         <section id="top" className="hero-shell">
           <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:px-10 lg:grid-cols-[1.12fr_0.88fr] lg:px-12 lg:py-24">
             <div>
-              <p className="section-eyebrow">Mechanical Engineering Portfolio</p>
+              <p className="section-eyebrow">AI Engineering Portfolio</p>
               <h1 className="mt-5 max-w-4xl text-5xl font-semibold leading-[1.02] text-white md:text-7xl">
                 {portfolio.headline}
               </h1>
@@ -74,6 +74,10 @@ export default function HomePage() {
                   <ExternalLink size={16} />
                   LinkedIn
                 </ButtonLink>
+                <ButtonLink external href={portfolio.github} variant="ghost">
+                  <Code2 size={16} />
+                  GitHub
+                </ButtonLink>
                 <ButtonLink href={portfolio.resumePath} newTab variant="ghost">
                   <FileText size={16} />
                   Resume
@@ -84,20 +88,20 @@ export default function HomePage() {
             <div className="hero-visual">
               <div className="hero-blueprint">
                 <div className="hero-blueprint-copy">
-                  <p className="section-eyebrow">Engineering scope</p>
+                  <p className="section-eyebrow">AI systems scope</p>
                   <h2 className="mt-4 text-2xl font-semibold text-white">
-                    Design, fabrication, validation, and AI-enabled tooling.
+                    Agents, local retrieval, evaluation, and human approval.
                   </h2>
                   <p className="mt-4 max-w-xl text-sm leading-7 text-white/65">
-                    Ocean West builds systems that connect mechanical design,
-                    composite manufacturing, test validation, and practical
-                    software workflows.
+                    Ocean West builds AI products that keep provider choice,
+                    local privacy, grounded output, and real engineering
+                    constraints visible in the workflow.
                   </p>
                 </div>
                 <div className="hero-visual-frame">
                   <ProjectVisual
-                    slug="steering-wheel-redesign"
-                    title="Composite steering wheel redesign"
+                    slug="clu-multi-agent-assistant"
+                    title="CLU multi-agent AI assistant"
                   />
                 </div>
               </div>
@@ -116,9 +120,9 @@ export default function HomePage() {
         <section className="section-shell" id="overview">
           <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-12">
             <SectionHeading
-              description="Ocean's work spans structural design, composite analysis, tooling, manufacturing methods, test execution, and software systems that support engineering decision-making."
-              eyebrow="Engineering Overview"
-              title="Technical work that moves from concept through measured validation."
+              description="Ocean's work connects multi-agent orchestration, local-first retrieval, product engineering, computer vision, and mechanical validation practice."
+              eyebrow="AI Engineering Overview"
+              title="AI systems built for grounded output, explicit control, and real workflows."
             />
             <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
               {portfolio.capabilityCards.map((card) => (
@@ -145,9 +149,9 @@ export default function HomePage() {
           <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-12">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
               <SectionHeading
-                description="Featured work across Formula SAE composites, vehicle design, instrumentation, and intelligent systems."
+                description="Featured AI systems spanning multi-agent orchestration, proprietary engineering knowledge, automotive workflows, and local computer vision."
                 eyebrow="Featured Projects"
-                title="Project pages built for technical storytelling, not generic portfolio cards."
+                title="AI projects grounded in delivery details, tests, constraints, and measurable outcomes."
               />
               <ButtonLink href="/projects" variant="secondary">
                 View all projects
@@ -165,9 +169,9 @@ export default function HomePage() {
         <section className="section-shell" id="experience">
           <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-12">
             <SectionHeading
-              description="Experience across motorsport composites, manufacturing process development, and materials testing."
+              description="Experience across AI product delivery, Formula SAE systems ownership, and experimental engineering validation."
               eyebrow="Experience"
-              title="Built around engineering ownership, documentation rigor, and measurable process improvement."
+              title="An AI engineering trajectory backed by product work and physical-systems rigor."
             />
             <div className="mt-10">
               <ExperienceTimeline entries={portfolio.experience} />
@@ -178,9 +182,9 @@ export default function HomePage() {
         <section className="section-shell" id="skills">
           <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-12">
             <SectionHeading
-              description="Skills are grouped by engineering function so the site reflects actual work, not a logo wall."
+              description="Skills are grouped by applied AI function and the engineering contexts that shape reliable delivery."
               eyebrow="Technical Capabilities"
-              title="Mechanical, manufacturing, testing, and software tools organized by real workflow."
+              title="AI, software, computer vision, and engineering tools organized by real workflow."
             />
             <div className="mt-10 grid gap-6 lg:grid-cols-2">
               {portfolio.skillGroups.map((group) => (
@@ -193,9 +197,9 @@ export default function HomePage() {
         <section className="section-shell" id="education">
           <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-12">
             <SectionHeading
-              description="Academic background across UT Austin and UT San Antonio, with coursework aligned to structures, materials, thermal systems, and controls."
+              description="Mechanical engineering education at UT Austin, complemented by hands-on AI systems and Formula SAE leadership."
               eyebrow="Education"
-              title="A current mechanical engineering path centered on materials, systems, and product development."
+              title="A mechanical engineering foundation applied to AI product and systems work."
             />
             <div className="mt-10 grid gap-6 lg:grid-cols-2">
               {portfolio.education.map((entry) => (
@@ -246,9 +250,9 @@ export default function HomePage() {
         <section className="section-shell" id="leadership">
           <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-12">
             <SectionHeading
-              description="Recognition and leadership presented as evidence of execution, mentorship, and team impact."
-              eyebrow="Leadership and Recognition"
-              title="Proof points drawn from competition results, systems building, and team development."
+              description="Awards and proof points from Formula SAE execution, academic performance, and AI product presentation."
+              eyebrow="Additional"
+              title="Results that reflect delivery, documentation, and engineering ownership."
             />
             <div className="mt-10 grid gap-6 lg:grid-cols-2">
               {portfolio.recognitions.map((item) => (
@@ -266,7 +270,7 @@ export default function HomePage() {
             <div className="panel relative overflow-hidden">
               <div className="absolute inset-y-0 right-0 hidden w-1/3 bg-[radial-gradient(circle_at_center,rgba(217,138,60,0.18),transparent_70%)] lg:block" />
               <SectionHeading
-                description="Available for conversations around composite structures, product development, motorsport engineering, testing workflows, and AI-enabled tools."
+                description="Available for conversations around AI engineering, local-first systems, RAG, computer vision, automotive product workflows, and Formula SAE."
                 eyebrow="Contact"
                 title="Reach out to discuss engineering work, product systems, or future collaboration."
               />
@@ -278,6 +282,10 @@ export default function HomePage() {
                 <ButtonLink external href={portfolio.linkedin} variant="secondary">
                   <ExternalLink size={16} />
                   LinkedIn
+                </ButtonLink>
+                <ButtonLink external href={portfolio.github} variant="secondary">
+                  <Code2 size={16} />
+                  GitHub
                 </ButtonLink>
                 <ButtonLink href={portfolio.resumePath} newTab variant="secondary">
                   <FileText size={16} />

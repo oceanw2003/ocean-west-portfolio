@@ -1,0 +1,107 @@
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage[margin=0.6in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\definecolor{accent}{HTML}{1F3864}
+
+\pagestyle{empty}
+\setlength{\tabcolsep}{0pt}
+\setlist[itemize]{leftmargin=0.17in, itemsep=0pt, topsep=1pt, parsep=0pt}
+\titleformat{\section}{\large\scshape\raggedright\color{accent}}{}{0em}{}[\color{accent}\titlerule]
+\titlespacing*{\section}{0pt}{5pt}{3pt}
+
+\newcommand{\resumeItem}[1]{\item\small{#1}}
+\newcommand{\resumeHeading}[4]{
+  \item
+  \begin{tabularx}{\textwidth}{@{}Xr@{}}
+    \textbf{#1} & #2 \\
+    \textit{\small #3} & \textit{\small #4} \\
+  \end{tabularx}\vspace{-3pt}
+}
+\newcommand{\resumeProject}[2]{
+  \item
+  \begin{tabularx}{\textwidth}{@{}Xr@{}}
+    \small\textbf{#1} & \small #2 \\
+  \end{tabularx}\vspace{-3pt}
+}
+
+\begin{document}
+
+\begin{center}
+  {\huge \textbf{\color{accent} Ocean West}} \\[2pt]
+  \mbox{\small Austin, TX \;|\; \href{mailto:oceanw2003@gmail.com}{oceanw2003@gmail.com} \;|\; (210) 632-7142 \;|\;
+  \href{https://github.com/oceanw2003}{github.com/oceanw2003} \;|\;
+  \href{https://www.linkedin.com/in/oceanw2003}{LinkedIn} \;|\;
+  \href{https://ocean-west-portfolio.vercel.app/}{Portfolio} \;|\; U.S. Citizen}
+\end{center}
+
+\section{AI Engineering Projects}
+\begin{itemize}[leftmargin=0in, label={}]
+  \resumeProject{CLU: Multi-Agent AI Assistant $|$ Python, Claude/GPT/Ollama, FastAPI}{2026 - Present}
+  \begin{itemize}
+    \resumeItem{Architected a production multi-agent system: \textbf{68 tools} across \textbf{16 specialized sub-agents} with a provider-agnostic backend supporting Claude, GPT, and local Ollama models; \textbf{418 passing tests} across about 28,000 lines of Python.}
+    \resumeItem{Designed tiered autonomy with human-in-the-loop approval gates enforced at the tool registry: read-only tools run unattended, while any action that writes files or incurs cost requires explicit approval.}
+    \resumeItem{Built an LLM evaluation framework scoring output on citation resolution, grounding, and task completion; caught a fabricated-source failure (35\% vs 96\% on verified output) that passed all 418 unit tests.}
+  \end{itemize}
+
+  \resumeProject{Composites AI Assistant (Longhorn Racing) $|$ Python, Streamlit, ChromaDB, Ollama}{Spring 2026}
+  \begin{itemize}
+    \resumeItem{Built a local-first RAG system over \textbf{200+ composites documents} (textbooks, material standards, ANSYS documentation, internal process files) with on-device embeddings and a local Chroma vector store, replacing manual shared-drive searches.}
+    \resumeItem{Adopted as the standing reference tool by the \textbf{10-person composites subsystem}; implemented a strict-local privacy mode blocking any cloud backend at the application layer to keep proprietary engineering documents on-machine; extends an Excel-based laminate calculator that cut design iteration time 15\%.}
+  \end{itemize}
+
+  \resumeProject{Sales Utility Engine $|$ FastAPI, Pydantic, SQLite, Ollama}{Summer 2026}
+  \begin{itemize}
+    \resumeItem{Led development of an end-to-end automotive sales assistant with separate customer and employee workspaces: inbound lead intake, chat-based qualification, vehicle catalog recommendations, meeting booking, and sales-handoff summaries.}
+    \resumeItem{Built a rule-based qualification engine scoring profile completeness, sales priority, and booking readiness over SQLite persistence and Pydantic models, with local Gemma inference through Ollama, deterministic fallback, and 23 passing tests.}
+  \end{itemize}
+
+  \resumeProject{Door Guard $|$ Python, YOLO, OpenCV, Ollama}{Summer 2026}
+  \begin{itemize}
+    \resumeItem{Developed a local-first computer-vision prototype detecting people in live webcam and RTSP streams with configurable door-zone loitering tracking, risk-based snapshots, JSONL event logs, and local LLM-generated deterrent dialogue with text-to-speech.}
+  \end{itemize}
+\end{itemize}
+
+\section{Technical Skills}
+\small
+\textbf{AI Engineering:} Python, Retrieval-Augmented Generation, OpenAI and Azure OpenAI APIs, ingestion and embedding pipelines, ChromaDB, local-first inference, multi-agent orchestration, agent evals and observability, semantic and BM25 retrieval, structured outputs \\
+\textbf{Software and AI Operations:} FastAPI, Streamlit, REST APIs, CLI development, Pydantic, JSON Schema, OpenAPI, Pytest, Git/GitHub, API health and metrics, JSONL audit logging, LLM guardrails, prompt-injection testing \\
+\textbf{Computer Vision and Engineering:} YOLO, OpenCV, RTSP/IP camera streams, SolidWorks, ANSYS Mechanical, ANSYS ACP, ASME/ISO/ASTM standards, additive manufacturing (FDM), tooling design, MATLAB, Arduino, data acquisition
+
+\section{Engineering Experience}
+\begin{itemize}[leftmargin=0in, label={}]
+  \resumeHeading{AI Engineering Intern}{Summer 2026}{Agentic Innovations}{Texas, United States}
+  \begin{itemize}
+    \resumeItem{Completed a 12-week AI engineering program across engineering, business, and marketing tracks; delivered prototypes on a 4-person cross-functional team (2 engineering, 1 business, 1 marketing).}
+    \resumeItem{Led Phase 2 as majority contributor on SUE; presented it to a panel of senior engineers from NVIDIA, Google, Meta, and NASA alongside cybersecurity specialists and industry recruiters.}
+  \end{itemize}
+
+  \resumeHeading{Composites Materials and Processes Integration Lead, Combustion Team}{May 2025 - May 2026}{Longhorn Racing, UT Formula SAE}{Austin, TX}
+  \begin{itemize}
+    \resumeItem{Led the materials and processing subsystem for non-aerodynamic composites on a 90-person Formula SAE team, owning composite design decisions across five vehicle systems; built material-property workflows used across the 10-person subsystem and referenced by other systems verifying their own calculations.}
+    \resumeItem{Supported a steering-wheel redesign achieving a \textbf{50\% mass reduction}; validated ANSYS simulations against tensile, bend, adhesive, and torsional testing to establish factors of safety from 1.5 to 8, and authored testing methodology adopted for the following season.}
+  \end{itemize}
+
+  \resumeHeading{Undergraduate Research and Development Intern}{Jan 2024 - Aug 2024}{UTSA Klesse College of Engineering and Integrated Design}{San Antonio, TX}
+  \begin{itemize}
+    \resumeItem{Conducted \textbf{100+ axial fatigue tests} on additively manufactured Ti-6Al-4V specimens for an \textbf{Air Force Research Laboratory} project, including Equivalent Initial Damage Size analysis; results supported a graduate researcher's findings presentation.}
+  \end{itemize}
+\end{itemize}
+
+\section{Education}
+\begin{itemize}[leftmargin=0in, label={}]
+  \resumeHeading{The University of Texas at Austin}{Expected Dec 2026}{B.S. Mechanical Engineering, GPA: 3.51/4.00}{Austin, TX}
+  \resumeHeading{The University of Texas at San Antonio}{Aug 2022 - May 2024}{Mechanical Engineering Studies, GPA: 3.89/4.00}{San Antonio, TX}
+\end{itemize}
+
+\section{Additional}
+\noindent\small \textbf{Awards:} Formula SAE: 26th Overall 2026 (from 46th, best in 4 years), 11th in Design 2025 \;|\; President's List \;|\; Dean's List (2x)\par
+\noindent\small \textbf{Interests:} Motorsport and Formula 1, golf, astronomy, photography
+
+\end{document}

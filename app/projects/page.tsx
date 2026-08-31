@@ -9,7 +9,7 @@ import { absoluteUrl } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Engineering and AI project work by Ocean West across Formula SAE composites, vehicle design, instrumentation, and software systems.",
+    "AI engineering and mechanical systems work by Ocean West, including multi-agent systems, local-first RAG, automotive workflows, computer vision, and Formula SAE composites.",
   alternates: {
     canonical: absoluteUrl("/projects"),
   },
@@ -22,9 +22,9 @@ export default function ProjectsPage() {
       <main className="bg-[var(--color-bg)] text-[var(--color-text)]">
         <section className="mx-auto max-w-7xl px-6 py-16 md:px-10 lg:px-12">
           <SectionHeading
-            description="A broader view of Ocean West's engineering and AI portfolio, including measured competition results and concept-driven systems work."
+            description="AI systems come first, followed by the Formula SAE, testing, and mechanical projects that inform Ocean's validation-first engineering approach."
             eyebrow="Projects"
-            title="Detailed project storytelling organized around verified engineering work."
+            title="Detailed work organized around reliable AI delivery and verified engineering outcomes."
           />
           <div className="mt-12 grid gap-6 xl:grid-cols-2">
             {portfolio.projects.map((project) => (

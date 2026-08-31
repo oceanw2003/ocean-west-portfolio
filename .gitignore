@@ -22,3 +22,6 @@ Thumbs.db
 
 # Raw camera and working image exports stay local. Commit only optimized public assets.
 /source/images/projects/**
+/source/documents/
+/source/extracted/
+/source/resume/build/
