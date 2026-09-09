@@ -10,6 +10,7 @@ const FILTERS: { value: Filter; label: string }[] = [
   { value: "all", label: "All work" },
   { value: "ai", label: "AI systems" },
   { value: "mechanical", label: "Mechanical" },
+  { value: "software", label: "Software" },
 ];
 
 type ProjectIndexProps = {
@@ -24,6 +25,7 @@ export function ProjectIndex({ projects }: ProjectIndexProps) {
       all: projects.length,
       ai: projects.filter((project) => project.discipline === "ai").length,
       mechanical: projects.filter((project) => project.discipline === "mechanical").length,
+      software: projects.filter((project) => project.discipline === "software").length,
     }),
     [projects],
   );

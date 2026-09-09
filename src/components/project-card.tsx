@@ -35,7 +35,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
           </span>
         ) : null}
         <span className="project-card-discipline">
-          {project.discipline === "ai" ? "AI Systems" : "Mechanical"}
+          {project.discipline === "ai"
+            ? "AI Systems"
+            : project.discipline === "software"
+              ? "Software"
+              : "Mechanical"}
         </span>
       </Link>
 

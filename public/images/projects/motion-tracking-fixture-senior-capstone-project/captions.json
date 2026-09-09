@@ -1,0 +1,10 @@
+{
+  "motiontracking fixture protype cad fully assembles with camera and  processor and sheetmetal box andvaporcahmbers.PNG": {
+    "stage": "Final concept",
+    "caption": "The assembled pod: stereo camera, Jetson Nano, and vapor chambers inside a sheet-metal enclosure. Compute sits on the pod rather than centrally, which trades a thermal problem for a latency saving."
+  },
+  "side view of cnnection of fixture box with bolts to 80-20 extrusion bars.PNG": {
+    "stage": "Mounting",
+    "caption": "The bolt connection to the 80/20 truss extrusion. The fixture hangs above an audience, so the mount was designed for redundancy rather than minimum weight."
+  }
+}

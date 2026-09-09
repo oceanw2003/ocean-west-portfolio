@@ -21,7 +21,7 @@ export type CapabilityCard = {
  * projects index and keeps the homepage from becoming all software or all
  * hardware, since the point of the site is that both are the same person.
  */
-export type Discipline = "ai" | "mechanical";
+export type Discipline = "ai" | "mechanical" | "software";
 
 export type Project = {
   slug: string;
@@ -375,9 +375,10 @@ export const portfolio = {
       ],
       metrics: [
         {
-          value: "23",
+          value: "103 / 104",
           label: "passing tests",
-          detail: "Focused API, storage, and assistant-generation coverage.",
+          detail:
+            "Across API, storage, qualification, catalog, and assistant behavior. The single failure is a stale assertion on landing-page copy that has since changed; the route itself still returns 200.",
           emphasis: "result",
         },
         {
@@ -386,7 +387,16 @@ export const portfolio = {
           detail: "Separate customer and employee workflows for lead progress and handoff.",
           emphasis: "result",
         },
+        {
+          value: "500+",
+          label: "leads per month",
+          detail:
+            "The inbound volume of the target dealership profile, established through customer interviews.",
+          emphasis: "result",
+        },
       ],
+      teamContext:
+        "A four-person team on a 12-week program. I led Phase 2 as majority contributor on the backend, qualification engine, and local model integration.",
       objective:
         "Build a reliable automotive sales workflow that qualifies inbound leads, helps users explore vehicle options, and produces actionable salesperson handoffs.",
       responsibilities: [
@@ -396,18 +406,29 @@ export const portfolio = {
         "Local LLM integration, fallback behavior, and tests",
       ],
       engineeringProcess: [
+        "Interviewed prospective users across biotech, university departments, a medical company, and car dealerships. The same complaint recurred: time lost answering repetitive questions and qualifying cold leads instead of working hot ones.",
+        "Chose car dealerships as the beachhead. They generate high inbound volume, most already run a generic chatbot that answers questions without advancing a sale, and every unanswered lead after hours is a sale walking to a competitor.",
         "Built separate customer and employee workspaces for inbound lead intake, chat-based qualification, vehicle recommendations, meeting booking, and sales-handoff summaries.",
-        "Implemented a rule-based qualification engine for profile completeness, sales priority, and booking readiness, with manual override support.",
-        "Added customer-session recovery, structured persistence, and company-profile-aware mock vehicle catalogs.",
+        "Implemented a rule-based qualification engine scoring intent, need fit, timeline, budget, engagement, and contact readiness, with penalties for trolling and manual override support.",
+        "Constrained recommendations to a dealership-controlled catalog, so the assistant answers from approved inventory and pricing rather than from model memory.",
+        "Added customer-session recovery, structured persistence, and company-profile-aware catalogs.",
       ],
       testingAndValidation: [
         "Integrated local Gemma inference through Ollama with deterministic fallback behavior when the model is unavailable.",
-        "Maintained 23 passing tests across API, storage, and assistant workflows.",
-        "Presented the Phase 2 product to senior engineers, cybersecurity specialists, and industry recruiters.",
+        "Adversarially tested the assistant against prompt injection. Told a $30,400 vehicle was actually $1, it declines to confirm the price, holds to the catalog figure, and offers a callback from a real representative.",
+        "Built that guardrail deliberately after the widely reported case of a dealership chatbot being talked into agreeing to sell a truck for a dollar.",
+        "Maintained 103 of 104 passing tests across API, storage, qualification, catalog, and assistant behavior.",
+        "Presented the Phase 2 product to senior engineers from NVIDIA, Google, Meta, and NASA alongside cybersecurity specialists and industry recruiters.",
+      ],
+      results: [
+        "A working two-sided product: a shopper is qualified through conversation, and a representative picks up a lead with preferences, priority score, and a generated handoff summary already assembled.",
+        "Qualification is a side effect of the conversation rather than a form, which is what removes the repetitive early-stage work the interviews identified.",
       ],
       constraintsAndTradeoffs: [
         "External CRM and booking integrations remain mock-first; the product does not claim production integrations.",
         "Local model availability cannot be assumed, so deterministic behavior remains available as a fallback.",
+        "Output quality depends on the catalog a dealership maintains. A thin or stale catalog produces thin answers, which is why catalog administration is part of the product rather than a setup step.",
+        "The assistant still occasionally reads as AI-generated, which matters in a product whose main claim is that it does not.",
       ],
       featured: true,
     },
@@ -452,6 +473,88 @@ export const portfolio = {
       constraintsAndTradeoffs: [
         "Detection quality depends on camera placement, stream reliability, lighting, and model performance.",
         "The prototype records structured evidence instead of making autonomous enforcement decisions.",
+      ],
+      featured: false,
+    },
+    {
+      slug: "car-saver",
+      title: "CarSaver",
+      shortTitle: "CarSaver",
+      discipline: "software",
+      category: "Graphics and Systems Programming",
+      summary:
+        "A Windows screensaver that draws a car as a rotating silver line drawing on black, using a software rasteriser and no dependencies beyond what ships with Windows.",
+      heroStatement:
+        "Not a wireframe. A wireframe shows you the triangles a model happens to be built from; this extracts only the lines a person would actually draw, then recomputes the silhouette every frame so the outline is correct from any angle.",
+      timeline: "August 2026",
+      technologies: [
+        "C#",
+        ".NET Framework",
+        "JavaScript",
+        "glTF",
+        "Computational geometry",
+        "Software rasterisation",
+      ],
+      metrics: [
+        {
+          value: "34 KB",
+          label: "executable",
+          detail:
+            "Plus a 660 KB model. No runtime to install and no libraries, because it compiles against the .NET Framework already present on Windows 10 and 11.",
+          emphasis: "result",
+        },
+        {
+          value: "118k to 6k",
+          label: "triangle reduction",
+          detail:
+            "Silhouette extraction from the full mesh every frame is unaffordable, so a vertex-clustered proxy shell stands in for it.",
+          emphasis: "result",
+        },
+        {
+          value: "59 MB",
+          label: "memory in use",
+          detail:
+            "The lowest of any screensaver measured, including the Windows built-ins. Bubbles uses 139 MB.",
+          emphasis: "result",
+        },
+        {
+          value: "14",
+          label: "car models",
+          detail: "Each processed through the same offline pipeline, with five selectable finishes.",
+          emphasis: "result",
+        },
+      ],
+      objective:
+        "Build a screensaver that looks like a designer's line drawing rather than a 3D model, and make it light enough to leave running.",
+      responsibilities: [
+        "Line-extraction pipeline and geometry processing",
+        "Software rasteriser and silhouette solver",
+        "Windows screensaver integration and settings dialog",
+        "Performance benchmarking against the built-ins",
+      ],
+      engineeringProcess: [
+        "Parsed binary glTF, flattened the scene graph, and baked node transforms into world-space vertices, tagging each face with its material.",
+        "Selected edges worth drawing by three rules: creases where the angle between neighbouring faces exceeds a threshold, boundaries where an edge has only one face, and material borders, which is where glass, lamps, and grilles come from.",
+        "Chained those edges into long strokes and simplified them, then wrote a compact binary so the screensaver never parses a 3D model at runtime.",
+        "Prototyped the whole renderer in the browser first, then ported it to C# as a direct translation, which made the algorithm debuggable before it had to also be fast.",
+      ],
+      designDecisions: [
+        "Built a coarse proxy shell by vertex clustering purely for silhouette extraction, trading exactness for a per-frame cost that fits in the budget.",
+        "Rasterised with order-independent additive blending, which removes the need to depth-sort strokes at all.",
+        "Moved every expensive step offline. At runtime the program reads pre-computed strokes and projects them, and nothing else.",
+        "Added burn-in protection as a pure black background plus slow global drift, so no line ever sits on a fixed pixel, which is what a screensaver was originally for.",
+      ],
+      testingAndValidation: [
+        "Benchmarked against the Windows built-ins at 2560x1440: 4.7% of a 16-core CPU, 20.9% GPU, 59 MB RAM, versus Bubbles at 0.4% CPU, 29.0% GPU, 139 MB.",
+        "Confirmed the tradeoff is real rather than a win across the board. It costs roughly ten times the single-core CPU of the built-ins because it is a software rasteriser, while using less GPU and less memory than any of them.",
+      ],
+      results: [
+        "A real .scr that appears in the Windows screensaver dropdown alongside Bubbles and 3D Text, with a working preview thumbnail and a settings dialog that previews as you drag.",
+        "A pipeline that works with any 3D car model, currently carrying 14.",
+      ],
+      constraintsAndTradeoffs: [
+        "Software rasterisation keeps one core busy continuously, which on a laptop holds the package in a higher power state and eventually brings the fans up. Lowering the frame rate to 20 fps roughly halves it.",
+        "Line extraction is only as good as the model's topology. A mesh with poor material separation loses the glass and lamp outlines that make the drawing readable.",
       ],
       featured: false,
     },
@@ -634,75 +737,73 @@ export const portfolio = {
     },
     {
       slug: "low-cost-engine-dynamometer",
-      title: "Low-Cost Engine Dynamometer",
+      title: "Engine Dynamometer and Tuned Intake",
       shortTitle: "Dynamometer",
       discipline: "mechanical",
       category: "Combustion Engine Processes",
       summary:
-        "Developed a low-cost dynamometer concept for a Predator 212 cc single-cylinder engine to measure torque and rotational speed and validate a custom Helmholtz-tuned intake.",
+        "A homemade dynamometer built to measure whether a Helmholtz-tuned intake actually did what the theory said it would on a 212cc single-cylinder engine.",
       heroStatement:
-        "An instrumentation-heavy concept centered on torque measurement, RPM sensing, calibration, and uncertainty.",
+        "Commercial dynamometers are priced out of a student project, so testing the intake meant building the instrument first. The intake was the hypothesis; the dyno was how we found out.",
       timeline: "Spring 2026",
+      teamContext:
+        "A four-person team project for ME 374C Combustion Engine Processes, with Carlos Cortez, Milagros Ramirez Martinez, and Tommy Thompson.",
       technologies: [
+        "SolidWorks",
         "Arduino",
-        "Force sensing",
-        "RPM sensing",
-        "Temperature monitoring",
+        "Python",
+        "Load cell",
+        "Hall-effect sensor",
+        "3D printing",
         "Data acquisition",
-        "Combustion-engine testing",
       ],
-      metrics: [],
+      metrics: [
+        {
+          value: "50 N·m",
+          label: "peak torque measured",
+          detail:
+            "At roughly 3500 RPM, matching the published stock figure for the engine and validating the rig against a known reference.",
+          emphasis: "result",
+        },
+        {
+          value: "212cc",
+          label: "single-cylinder engine",
+          detail: "A Predator engine, chosen for cost and for the availability of published stock data.",
+          emphasis: "result",
+        },
+        {
+          value: "3",
+          label: "printed intake sections",
+          detail: "The tuned runner was split for printability, then assembled and port-matched.",
+          emphasis: "result",
+        },
+      ],
       objective:
-        "Create a low-cost dynamometer concept capable of measuring torque and rotational speed for engine testing and intake validation.",
+        "Design an intake tuned to a target RPM using Helmholtz resonance, then build the instrumentation needed to test whether it delivered the predicted gain.",
       responsibilities: [
-        "Mechanical system concept development",
-        "Instrumentation architecture",
-        "Calibration and uncertainty planning",
-        "Experimental test design",
-      ],
-      conceptDetails: [
-        "Strap-brake dynamometer",
-        "Torque measurement through a calibrated force sensor and moment arm",
-        "Hall-effect or optical RPM sensing",
-        "Arduino-based data acquisition",
-        "Temperature monitoring",
-        "Low-cost fabricated frame and brake assembly",
+        "Intake design and Helmholtz length calculation",
+        "Dynamometer mechanical design and fabrication",
+        "Arduino and Python data acquisition",
+        "Test methodology and results analysis",
       ],
       engineeringProcess: [
-        "Framed the system around direct measurement of torque and speed rather than inferred estimates.",
-        "Specified low-cost instrumentation that could still support calibration and uncertainty analysis.",
-        "Tied the test rig concept to validation of a custom Helmholtz-tuned intake.",
-      ],
-      toolsAndTechnologies: [
-        "Arduino",
-        "Force sensors",
-        "Hall-effect or optical sensing",
-        "Temperature instrumentation",
-        "Experimental validation methods",
-      ],
-      designDecisions: [
-        "Selected a strap-brake architecture to keep the concept manufacturable and low cost.",
-        "Included sensor choices that support both educational value and meaningful measurement quality.",
+        "Used Helmholtz resonance to calculate the runner length that would boost volumetric efficiency at the target RPM, modelled it in SolidWorks, and split it into three printable sections.",
+        "Built a strap-brake dynamometer: a load cell reads reaction force through a torque arm while a Hall-effect sensor counts engine speed, both sampled by an Arduino and logged in Python.",
+        "Mounted the engine on a plywood base with wood studs, which was enough to hold alignment under load without a welded frame.",
       ],
       testingAndValidation: [
-        "Calibration planning for torque measurement.",
-        "Instrumentation intended to support uncertainty-aware engine testing.",
+        "Swept the engine under increasing brake load and recorded torque against RPM, applying smoothing to separate the trend from measurement noise.",
+        "Validated the rig against the published stock figure of 50 N·m at 3500 RPM before trusting it to evaluate the intake.",
+        "Traced scatter in the raw data to load-cell creep, strap settling, and sensitivity to mechanical alignment rather than to engine behavior.",
       ],
       results: [
-        "Developed a structured dynamometer concept and test architecture for future validation work.",
+        "The dynamometer captured the expected torque-versus-RPM relationship: torque rises with braking force while speed falls, consistent with known engine behavior under load.",
+        "The rig proved that a low-cost strap brake with a load cell and Hall sensor is accurate enough to compare configurations, which was the point of building it.",
       ],
       constraintsAndTradeoffs: [
-        "Low cost had to be balanced against usable instrumentation quality.",
-        "The concept needed to support both mechanical fabrication and repeatable data collection.",
-      ],
-      focusAreas: [
-        "Mechanical design",
-        "Instrumentation",
-        "Calibration",
-        "Uncertainty",
-        "Combustion-engine testing",
-        "Data acquisition",
-        "Experimental validation",
+        "The intake cracked at the flange while the dynamometer platform was being moved, so the comparison run against the stock intake was never completed. The result is a validated instrument and an unproven intake.",
+        "Absolute torque values carry likely calibration error against the stock reference. The rig is more trustworthy for comparing two configurations than for reporting absolute numbers.",
+        "A strap brake is cheap and simple but introduces friction and settling effects that a water or eddy-current brake would avoid.",
       ],
       featured: true,
     },
@@ -713,7 +814,7 @@ export const portfolio = {
       discipline: "mechanical",
       category: "Robot Mechanism Design",
       summary:
-        "A six-legged walking robot that produces its gait through linkage geometry instead of control software, driven by one motor per side.",
+        "An eight-legged walking robot that produces its gait through linkage geometry instead of control software, driven by one motor per side.",
       heroStatement:
         "Most walking robots coordinate many actuators through sensor feedback. This one has none. A Jansen eight-bar linkage turns a single rotary input into a walking trajectory mechanically, so the gait is a property of the geometry rather than the code.",
       timeline: "Spring 2026",
@@ -743,9 +844,10 @@ export const portfolio = {
           emphasis: "result",
         },
         {
-          value: "8-bar",
-          label: "linkage per leg",
-          detail: "Six legs total, phase-offset around a shared crankshaft on each side.",
+          value: "8",
+          label: "legs, 4 per side",
+          detail:
+            "Phase-offset around a shared crankshaft so at least four feet are on the ground at any point in the rotation.",
           emphasis: "result",
         },
         {
@@ -762,11 +864,11 @@ export const portfolio = {
         "Built the linkage in MotionGen first to confirm the foot path before committing to CAD, treating the proof of concept as something that had to stay easy to modify.",
         "Modeled the full eight-bar leg in SolidWorks to check interference and range of motion in three dimensions.",
         "Built one physical leg and got it swinging freely before cutting the remaining five, which set the bolt-torque reference for every joint after it.",
-        "Moved from a single leg to a synchronized six-leg chassis with phase offsets, then added the drivetrain and radio control.",
+        "Moved from a single leg to a synchronized eight-leg chassis with phase offsets, then added the drivetrain and radio control.",
       ],
       designDecisions: [
         "Used Jansen's published link proportions, which produce a smooth gait with a flat stance phase from a single crank.",
-        "Offset adjacent lateral legs by 180 degrees and corner legs by 90 degrees, so ground contact is continuous and motor load is spread across the rotation rather than spiking once per cycle.",
+        "Offset adjacent lateral legs by 180 degrees and corner legs by 90 degrees, which keeps at least four of the eight feet on the ground at any point in the rotation and spreads motor load across the cycle instead of spiking once per revolution.",
         "Chose tank drive with one motor per side, making turning a differential-speed problem instead of a steering-mechanism problem.",
         "Added an asymmetric indicator hole to the near-equilateral center ternary link, a poka-yoke that made it impossible to install in the wrong orientation.",
         "Placed stainless washers at every plywood-on-plywood interface to cut friction, and plastic spacers between the three linkage layers to prevent interference.",
@@ -780,6 +882,7 @@ export const portfolio = {
         "Laser-cut 6mm plywood links with 3D-printed mounts and gears",
       ],
       testingAndValidation: [
+        "Tested an early prototype and catalogued what failed: it ran tethered by wire, the electronics had no housing, the legs slipped under load, and the axles bent easily. Each of those drove a specific change in the final build.",
         "Wrote a Python solver that decomposes the linkage into dyads and applies the law of cosines at each one, avoiding a single large system of equations.",
         "Chained position, velocity, and acceleration through all five loops and checked the resulting toe trace against the expected gait before trusting the output.",
         "Ran coarse-mesh FEA at 1.5x body weight using laminate plywood properties, which identified the crank as the highest-stress region because it carries all input torque through a short moment arm.",
@@ -799,100 +902,87 @@ export const portfolio = {
     },
     {
       slug: "motion-tracking-fixture",
-      title: "Motion-Tracking Fixture for Immersive Events",
-      shortTitle: "Motion Tracking",
+      title: "Modular Crowd-Tracking Fixture",
+      shortTitle: "Crowd-Tracking Fixture",
       discipline: "mechanical",
-      category: "Senior Design",
+      category: "Mechanical Engineering Design Capstone",
       summary:
-        "Developed a modular multi-camera fixture concept for real-time human motion tracking in stadiums, concerts, and immersive venues.",
+        "A truss-mounted camera and compute pod that tracks audience motion at the Moody Center, turning crowd movement into a signal a production team can act on.",
       heroStatement:
-        "A systems concept connecting structural design, thermal thinking, computer vision integration, and deployment logistics.",
+        "Live performance is a one-way experience: the crowd reacts and nothing measures it. This fixture puts sensing on the truss so audience motion becomes an input to the show rather than something only the performer sees.",
       timeline: "Spring 2026",
+      teamContext:
+        "Senior capstone with Team Argus, sponsored by Agentic Innovations and the Texas Immersive Institute at UT Austin's Moody College of Communication.",
       technologies: [
-        "Computer vision integration",
-        "Sensor fusion",
-        "PoE connectivity",
-        "TouchDesigner output",
-        "Structural design",
-        "Thermal management",
+        "SolidWorks",
+        "ZED X stereo camera",
+        "Jetson Nano",
+        "80/20 extrusion",
+        "Vapor chamber cooling",
+        "PoE networking",
+        "FMEA",
+        "TRIZ",
       ],
       metrics: [
         {
-          value: "50 ms",
-          label: "latency target",
-          detail: "End-to-end latency target of 50 milliseconds or less.",
+          value: "< 100 ms",
+          label: "tracking latency",
+          detail: "Set by the need for interaction that feels real-time to an audience.",
           emphasis: "target",
         },
         {
-          value: "60 FPS",
-          label: "frame-rate target",
-          detail: "Target frame rate of at least 60 FPS.",
+          value: "330°",
+          label: "camera field of view",
+          detail: "Achieved by stitching overlapping wide-angle views rather than one long-range unit.",
           emphasis: "target",
         },
         {
-          value: "300 ft",
-          label: "tracking-range target",
-          detail: "Target tracking range of at least 300 feet.",
+          value: "< 1%",
+          label: "false detection rate",
+          detail: "A wrong trigger in front of a live crowd is worse than a missed one.",
           emphasis: "target",
         },
         {
-          value: "35 lb",
-          label: "fixture-weight target",
-          detail: "Total fixture weight target of 35 pounds or less.",
-          emphasis: "target",
+          value: "$1,225",
+          label: "bill of materials",
+          detail:
+            "Per pod, including the ZED X camera at $709 and Jetson Nano at $249. Low unit cost is what makes an array of pods viable instead of one expensive long-range sensor.",
+          emphasis: "result",
         },
       ],
       objective:
-        "Develop a modular fixture concept for large-venue human motion tracking with practical deployment and performance targets.",
+        "Design a modular fixture that captures audience motion across a large venue, processes it on-pod, and hands gesture triggers to the production control room within a latency budget an audience would not notice.",
       responsibilities: [
-        "Mechanical architecture",
-        "Requirements definition",
-        "Structural concept design",
-        "Thermal and integration planning",
-      ],
-      conceptDetails: [
-        "Hemispherical suspended fixture with overlapping RGB camera views",
-        "Multi-view pose estimation and sensor fusion",
-        "PoE connectivity",
-        "Edge or NPU-assisted inference",
-        "OSC output to TouchDesigner",
-        "Modular camera and processing architecture",
+        "Structural mounting and enclosure design",
+        "Thermal strategy for on-pod compute",
+        "Specification development from stakeholder interviews",
+        "Failure analysis and design-for-X review",
       ],
       engineeringProcess: [
-        "Defined system requirements around latency, frame rate, range, field of view, setup time, weight, and structural safety.",
-        "Mapped the fixture around overlapping camera views to support multi-view tracking.",
-        "Considered deployment reality by including PoE, modularity, and integration with TouchDesigner workflows.",
-      ],
-      toolsAndTechnologies: [
-        "Computer vision integration",
-        "Sensor fusion",
-        "PoE infrastructure",
-        "TouchDesigner interoperability",
-        "Structural design thinking",
+        "Interviewed Moody Center attendees, venue staff, and production engineers, then translated what they asked for into measurable specifications rather than adjectives.",
+        "Decomposed the system into capture, process, transmit, generate output, and support deployment, which expanded into 27 leaf functions covering the full requirement set.",
+        "Generated concepts through mind mapping, TRIZ, and worst-idea inversion, including a biomimetic study of the insect compound eye that became a multi-camera pod arrangement.",
+        "Produced five concept variants, then combined the three highest-ranked into the final design: an RGB stereo camera on a truss-mounted pod.",
       ],
       designDecisions: [
-        "A hemispherical suspended concept supports overlapping views and venue coverage.",
-        "Modularity was treated as a core requirement for scaling and field setup.",
-        "Edge or NPU-assisted inference was considered to help satisfy latency targets.",
+        "Used a TRIZ tradeoff matrix to work through the contradictions directly. Faster tracking raises heat, so processing is burst-based with active cooling; wider coverage adds hardware, so overlapping wide-angle lenses are stitched instead.",
+        "Chose an array of low-cost sensors over a single long-range unit, which keeps per-pod cost down and makes coverage a function of how many pods are deployed.",
+        "Built the enclosure as a single base plate with bolt-on components, so every part is swappable without full disassembly.",
+        "Put compute on the pod rather than centrally, trading a thermal problem for a latency and network-bandwidth saving.",
       ],
       testingAndValidation: [
-        "Performance targets were documented as design requirements rather than claimed completed outcomes.",
+        "Ran FMEA across structural, thermal, power, networking, and software failure modes, then redesigned against the worst of them.",
+        "Thermal throttling on the Jetson Nano was the highest-risk item at RPN 210 and came down to 42 after adding a vapor chamber and burst processing.",
+        "Every tracked failure mode was reduced: structural 60 to 18, power 144 to 32, networking 150 to 36, and software 105 to 36.",
       ],
       results: [
-        "Established a requirements-driven concept for a modular motion-tracking fixture.",
+        "A costed, analyzed design with a complete specification set, mechanical package, and failure analysis, taken to final design review.",
+        "Cooling and mounting were resolved against the specific failure modes that FMEA identified rather than against generic margin.",
       ],
       constraintsAndTradeoffs: [
-        "Large field of view, low latency, and low fixture weight create competing system demands.",
-        "Venue deployment requirements shape both structural and processing architecture.",
-      ],
-      focusAreas: [
-        "Mechanical architecture",
-        "System requirements",
-        "Structural design",
-        "Thermal management",
-        "Computer vision integration",
-        "Latency budgeting",
-        "Scalability",
+        "The fixture hangs above an audience, so structural failure is a safety problem rather than a performance one. That drove redundant mounting over minimum weight.",
+        "Specifications are design targets carried to final review. The system was not built and tested against a live crowd, so nothing here is a measured result.",
+        "Remaining work is field validation: refining gesture recognition on real crowd data, a scaled classroom test simulating two Moody sections, environmental testing across acoustics, lighting and density, and FEA of the mount under dynamic loading.",
       ],
       featured: false,
     },

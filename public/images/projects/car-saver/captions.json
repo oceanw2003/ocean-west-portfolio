@@ -1,0 +1,14 @@
+{
+  "01-line-drawing-of-the-c63-507.png": {
+    "stage": "Output",
+    "caption": "The 2015 C63 AMG 507 Edition as the screensaver draws it: creases, panel gaps, window openings, wheel arches, lamps and grille, plus a silhouette recalculated every frame so the outline stays correct as it rotates. No triangles from the underlying mesh are visible because none of them are drawn."
+  },
+  "02-settings-with-live-preview.png": {
+    "stage": "Configuration",
+    "caption": "The settings dialog, previewing as you drag. Finish, detail lines, line density, and frame rate are all live, and the car list carries 14 models through the same offline pipeline. Burn-in protection and battery-aware options are on by default."
+  },
+  "03-registered-in-windows-screensaver-settings.png": {
+    "stage": "Integration",
+    "caption": "Registered as a real .scr alongside the Windows built-ins, with a working preview thumbnail, so it behaves like a first-party screensaver rather than an app pretending to be one."
+  }
+}

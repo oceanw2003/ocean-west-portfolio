@@ -1,3 +1,18 @@
 {
-  "01-dynamometer-assembly-with-predator-engine.jpg": { "caption": "The dynamometer assembly: Predator engine, torque arm, Arduino instrumentation, and a printed intake." }
+  "01-tuned-intake-prepared-for-printing.jpg": {
+    "stage": "Design",
+    "caption": "The tuned runner in the slicer. Helmholtz resonance set the length needed to boost volumetric efficiency at the target RPM; printability set where it had to be split."
+  },
+  "02-three-piece-printed-intake.JPG": {
+    "stage": "Fabrication",
+    "caption": "The intake printed in three sections with bolted flanges, so a runner longer than the build volume could still be produced and assembled."
+  },
+  "03-dynamometer-assembly-and-instrumentation.jpg": {
+    "stage": "Test rig",
+    "caption": "The dynamometer built to test it: the 212cc Predator engine on a plywood base, a torque arm and strap brake feeding a load cell, and Arduino instrumentation reading torque and RPM."
+  },
+  "04-intake-cracked-at-the-flange.JPG": {
+    "stage": "Failure",
+    "caption": "The intake cracked at the flange while the dynamometer platform was being repositioned, before the comparison run against the stock intake could be completed. The instrument was validated; the part it was built to evaluate was not."
+  }
 }
